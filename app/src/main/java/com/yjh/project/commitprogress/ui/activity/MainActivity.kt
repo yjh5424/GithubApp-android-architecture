@@ -1,12 +1,13 @@
-package com.yjh.project.commitprogress
+package com.yjh.project.commitprogress.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.yjh.project.commitprogress.ui.OwnerRepoFragment
-import com.yjh.project.commitprogress.ui.TeamRepoFragment
+import com.yjh.project.commitprogress.R
+import com.yjh.project.commitprogress.ui.fragment.OwnerRepoFragment
+import com.yjh.project.commitprogress.ui.fragment.TeamRepoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

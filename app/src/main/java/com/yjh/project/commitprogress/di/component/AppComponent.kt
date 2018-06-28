@@ -1,12 +1,9 @@
 package com.yjh.project.commitprogress.di.component
 
-import android.app.Application
-import com.yjh.project.commitprogress.MainActivity
-import com.yjh.project.commitprogress.MyApplication
+import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.di.module.AppModule
 import com.yjh.project.commitprogress.di.module.NetworkModule
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
-import com.yjh.project.commitprogress.ui.OwnerRepoFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -16,7 +13,7 @@ import javax.inject.Singleton
 )
 interface AppComponent{
 
-    fun inject(application: MyApplication)
+    fun inject(app: App)
 
     fun inject(ownerRepoPresenter: OwnerRepoPresenter)
 }

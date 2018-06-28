@@ -1,6 +1,5 @@
-package com.yjh.project.commitprogress.ui
+package com.yjh.project.commitprogress.ui.fragment
 
-import android.app.Application
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.omjoonkim.project.interviewtask.model.Repo
-import com.yjh.project.commitprogress.MyApplication
 
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
