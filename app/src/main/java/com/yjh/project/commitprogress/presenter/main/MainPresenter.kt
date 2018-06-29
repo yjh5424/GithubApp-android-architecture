@@ -2,6 +2,6 @@ package com.yjh.project.commitprogress.presenter.main
 
 
 
-class MainPresenter{
+class MainPresenter(val view : MainContract.View) : MainContract.UserActionsListener{
 
 }
