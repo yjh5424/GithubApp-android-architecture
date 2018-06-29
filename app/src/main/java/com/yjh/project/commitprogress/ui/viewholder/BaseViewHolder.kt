@@ -6,6 +6,5 @@ import android.view.View
 
 
 open class BaseViewHolder(rootView : View) : RecyclerView.ViewHolder(rootView){
-
     fun stringToUri(str: String) : Uri = Uri.parse(str)
 }

@@ -1,5 +1,6 @@
 package com.yjh.project.commitprogress.presenter.ownerRepo
 
+import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
 import javax.inject.Inject
@@ -13,8 +14,6 @@ class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.U
 
     override fun loadRepositories(userName : String) {
         githubDataRepository.getUserRepo(userName)
-                .subscribe {
-                    it ->  view.showRepositories(it)
-                }
+                .subscribe { it -> it.sortedBy { repo -> repo.stargazersCount }.let { view.showRepositories(it)  }}
     }
 }

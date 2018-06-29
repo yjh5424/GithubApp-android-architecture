@@ -2,6 +2,8 @@ package com.yjh.project.commitprogress.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +13,14 @@ import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
+import com.yjh.project.commitprogress.ui.adapter.OwnerRepoRecyclerViewAdapter
+import kotlinx.android.synthetic.main.fragment_owner.*
+import kotlinx.android.synthetic.main.fragment_owner.view.*
 
 class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
 
     lateinit var mActionsListener: OwnerRepoContract.UserActionsListener
+    val  ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter() }
 
     companion object {
         fun newInstance() = OwnerRepoFragment()
@@ -24,23 +30,36 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
         super.onCreate(savedInstanceState)
 
         mActionsListener = OwnerRepoPresenter(this)
-        mActionsListener.loadRepositories("yjh5424")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_owner, container, false)
+        var rootView =inflater.inflate(R.layout.fragment_owner, container, false)
+
+        with(rootView){
+            recyclerView.layoutManager =GridLayoutManager(context,2)
+            recyclerView.adapter=ownerRepoRecyclerViewAdapter
+        }
+
+
+        mActionsListener.loadRepositories("yjh5424")
+
+
+        return rootView
     }
 
+    override fun onStart() {
+        super.onStart()
+        mActionsListener.loadRepositories("yjh5424")
+
+    }
 
     override fun showRepositories(repositories: List<Repo>) {
-        Toast.makeText(context,repositories[0].name,Toast.LENGTH_LONG).show()
+        ownerRepoRecyclerViewAdapter.setList(repositories)
     }
 
 
     override fun moveRepositoryDetailUi(id: Long) {
 
     }
-
 }
