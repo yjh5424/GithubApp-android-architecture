@@ -19,7 +19,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 
 @Module
-class NetworkModule(var mBaseUrl: String) {
+class NetworkModule(val mBaseUrl: String) {
 
     @Provides
     @Singleton
