@@ -12,7 +12,7 @@ import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
-import com.yjh.project.commitprogress.ui.activity.RepositoryDetailActivity
+import com.yjh.project.commitprogress.ui.activity.OwnerRepositoryDetailActivity
 import com.yjh.project.commitprogress.ui.adapter.OwnerRepoRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_owner.view.*
 
@@ -50,17 +50,12 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
         return rootView
     }
 
-    override fun onStart() {
-        super.onStart()
-        //mActionsListener.loadRepositories("yjh5424")
-    }
-
     override fun showRepositories(repositories: List<Repo>) {
         ownerRepoRecyclerViewAdapter.setList(repositories)
     }
 
     override fun moveRepositoryDetailUi(repoName: String) {
-        Intent(context,RepositoryDetailActivity::class.java).let {
+        Intent(context,OwnerRepositoryDetailActivity::class.java).let {
             startActivity(it)
         }
     }

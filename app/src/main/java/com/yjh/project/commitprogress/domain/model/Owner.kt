@@ -3,7 +3,10 @@ package com.omjoonkim.project.interviewtask.model
 import com.google.gson.annotations.SerializedName
 
 data class Owner(
-        @SerializedName("id") val id: Long,
-        @SerializedName("login") val name: String,
+        val id: Long,
+        val name: String,
+        val company : String?,
+        val login : String,
+        val location : String?,
         @SerializedName("avatar_url")val avatar: String
 )

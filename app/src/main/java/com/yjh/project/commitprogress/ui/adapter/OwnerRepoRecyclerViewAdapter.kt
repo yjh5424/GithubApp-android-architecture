@@ -19,8 +19,13 @@ class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoCont
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        var repository=repositories[position]
-        (holder as OwnerRepoViewHolder).bindTo(repository.name,repository.description,repository.language,repository.stargazersCount)
+        repositories[position].let {
+            (holder as OwnerRepoViewHolder)
+                    .bindTo(it.name,
+                            it.description,
+                            it.language,
+                            it.stargazersCount)
+        }
     }
 
     override fun getItemCount(): Int =repositories.size

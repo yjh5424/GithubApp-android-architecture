@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.RepositoryDetailActivity"></activity>
+        <activity android:name=".ui.activity.OwnerRepositoryDetailActivity"></activity>
     </application>
 
 </manifest>

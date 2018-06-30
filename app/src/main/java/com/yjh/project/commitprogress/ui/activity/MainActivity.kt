@@ -8,11 +8,15 @@ import com.omjoonkim.project.interviewtask.model.Owner
 import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.main.MainContract
+import com.yjh.project.commitprogress.presenter.main.MainPresenter
+import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.ui.fragment.OwnerRepoFragment
 import com.yjh.project.commitprogress.ui.fragment.TeamRepoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() , MainContract.View{
+
+    lateinit var mActionsListener: MainContract.UserActionsListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,10 @@ class MainActivity : BaseActivity() , MainContract.View{
 
         viewPager.adapter = ViewPagerAdapter(supportFragmentManager)
         tabLayout.setupWithViewPager(viewPager)
+
+        mActionsListener=MainPresenter(this)
+        mActionsListener.loadProfile("yjh5424")
+
     }
 
     class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
