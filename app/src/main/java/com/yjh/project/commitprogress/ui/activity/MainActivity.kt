@@ -9,7 +9,6 @@ import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.main.MainContract
 import com.yjh.project.commitprogress.presenter.main.MainPresenter
-import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.ui.fragment.OwnerRepoFragment
 import com.yjh.project.commitprogress.ui.fragment.TeamRepoFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,6 +49,10 @@ class MainActivity : BaseActivity() , MainContract.View{
     override fun showProfile(owner: Owner) {
         Picasso.with(applicationContext).load(stringToUri(owner.avatar)).into(avatar)
         name.text=owner.name
+        login.text=owner.login
+        location.text=owner.location ?: ""
+        email.text=owner.email ?: ""
+        team.text=owner.company ?: ""
     }
 
 }

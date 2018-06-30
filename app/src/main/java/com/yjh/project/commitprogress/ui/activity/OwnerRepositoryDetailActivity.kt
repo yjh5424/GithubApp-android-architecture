@@ -12,7 +12,6 @@ class OwnerRepositoryDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_owner_repository_detail)
 
-
         repo_web_view.loadUrl("https://github.com/yjh5424/CommitProgress")
     }
 }

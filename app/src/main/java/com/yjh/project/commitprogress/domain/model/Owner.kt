@@ -8,5 +8,6 @@ data class Owner(
         val company : String?,
         val login : String,
         val location : String?,
+        val email : String?,
         @SerializedName("avatar_url")val avatar: String
 )
