@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.omjoonkim.project.interviewtask.model.Repo
-
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
 import com.yjh.project.commitprogress.ui.adapter.OwnerRepoRecyclerViewAdapter
-import kotlinx.android.synthetic.main.fragment_owner.*
 import kotlinx.android.synthetic.main.fragment_owner.view.*
 
 class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
@@ -37,13 +35,11 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
         var rootView =inflater.inflate(R.layout.fragment_owner, container, false)
 
         with(rootView){
-            recyclerView.layoutManager =GridLayoutManager(context,2)
+            recyclerView.layoutManager =StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
             recyclerView.adapter=ownerRepoRecyclerViewAdapter
         }
 
-
-        mActionsListener.loadRepositories("yjh5424")
-
+        //mActionsListener.loadRepositories("yjh5424")
 
         return rootView
     }

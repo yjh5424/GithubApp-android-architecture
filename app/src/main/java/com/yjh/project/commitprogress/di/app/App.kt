@@ -13,8 +13,6 @@ class App : Application() {
         //platformStatic allow access it from java code
         @JvmStatic lateinit var component: AppComponent
         val BASE_URL="https://api.github.com/"
-        val GITHUB_CLIENT_ID="65904bb18cddf718a836"
-        val GITHUB_SECRET="1b5dda5bbdc51d8bb8059d844af7364e288e2beb"
     }
 
     override fun onCreate() {

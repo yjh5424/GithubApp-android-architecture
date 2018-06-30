@@ -6,9 +6,7 @@ import okhttp3.OkHttpClient
 import com.google.gson.Gson
 import javax.inject.Singleton
 import dagger.Provides
-import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import android.app.Application
 import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
 import com.yjh.project.commitprogress.network.GithubApi
 import com.yjh.project.commitprogress.network.GithubApiClient
