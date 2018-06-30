@@ -1,6 +1,6 @@
 # CommitProgress
 
-Dagger2 + MVP + Retrofit2 + RxJava2 (JUnit4 , Espress를 이용한 U, 단위 테스트 까지)
+Dagger2 + MVP + Retrofit2 + RxJava2 (JUnit4 , Espress를 이용한 Ui, 단위 테스트 까지)
 
 Github api를 사용하여 간단한 프로젝트를 만들어 누구나 보기좋고 이쁜 코드를 작성하고   
 다른사람들이 안드로이드를 공부할때 참고 할 만큼의 코드를 만드는 것이 목적입니다!
