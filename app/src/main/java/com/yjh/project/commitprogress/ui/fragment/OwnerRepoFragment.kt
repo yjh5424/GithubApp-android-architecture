@@ -22,7 +22,7 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
 
     private val  ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
-    private val  repositoryClick=(object: OwnerRepoContract.onRepositoryListener{
+    private val  repositoryClick=(object: OwnerRepoContract.OnRepositoryListener{
         override fun onRepositoryClick(repoName: String) {
             mActionsListener.openRepositoriesDetails(repoName)
         }
@@ -46,20 +46,19 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
             recyclerView.adapter=ownerRepoRecyclerViewAdapter
         }
 
-        //mActionsListener.loadRepositories("yjh5424")
+        mActionsListener.loadRepositories("yjh5424")
         return rootView
     }
 
     override fun onStart() {
         super.onStart()
-        mActionsListener.loadRepositories("yjh5424")
-
+        //mActionsListener.loadRepositories("yjh5424")
     }
 
     override fun showRepositories(repositories: List<Repo>) {
         ownerRepoRecyclerViewAdapter.setList(repositories)
     }
-    
+
     override fun moveRepositoryDetailUi(repoName: String) {
         Intent(context,RepositoryDetailActivity::class.java).let {
             startActivity(it)

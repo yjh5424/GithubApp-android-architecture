@@ -1,16 +1,13 @@
 package com.yjh.project.commitprogress.ui.viewholder
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 
-class OwnerRepoViewHolder(val parent: ViewGroup,private val repositoryListener: OwnerRepoContract.onRepositoryListener) : BaseViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_owner_repo, parent, false)) {
+class OwnerRepoViewHolder(val parent: ViewGroup,private val repositoryListener: OwnerRepoContract.OnRepositoryListener) : BaseViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_owner_repo, parent, false)){
 
     private val repoNameTextView = itemView.findViewById<TextView>(R.id.name)
     private val repoDescTextView = itemView.findViewById<TextView>(R.id.desc)
@@ -23,6 +20,7 @@ class OwnerRepoViewHolder(val parent: ViewGroup,private val repositoryListener: 
         repoDescTextView.text = repoDesc ?: ""
         repoStarTextView.text = repoStar.toString()
         repoLanguageTextView.text = language ?: ""
+
         itemView.setOnClickListener{
             repositoryListener.onRepositoryClick(repoName)
         }

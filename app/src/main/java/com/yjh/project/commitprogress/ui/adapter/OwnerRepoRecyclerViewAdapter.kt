@@ -7,7 +7,7 @@ import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.ui.viewholder.OwnerRepoViewHolder
 
 
-class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoContract.onRepositoryListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoContract.OnRepositoryListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var repositories = mutableListOf<Repo>()
 
