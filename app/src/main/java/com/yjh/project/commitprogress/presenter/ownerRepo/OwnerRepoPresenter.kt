@@ -14,6 +14,6 @@ class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.U
 
     override fun loadRepositories(userName : String) {
         githubDataRepository.getUserRepo(userName)
-                .subscribe {response -> response.sortedBy { repo -> repo.stargazersCount }.let { view.showRepositories(it)  }}
+                .subscribe {response -> response.sortedByDescending{ repo -> repo.stargazersCount }.let { view.showRepositories(it)  }}
     }
 }
