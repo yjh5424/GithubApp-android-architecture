@@ -12,11 +12,17 @@ interface OwnerRepoContract{
         // UserActionsListener 안의 loadRepositories 함수로 어댑터에 세팅
         fun showRepositories(repositories: List<Repo>)
 
-        fun moveRepositoryDetailUi(id : Long)
+        fun moveRepositoryDetailUi(repoName: String)
+    }
+
+    interface onRepositoryListener{
+        fun onRepositoryClick(repoName: String)
     }
 
     interface UserActionsListener{
         //프레전터에서 상속받아서 구현
         fun loadRepositories(userName : String)
+
+        fun openRepositoriesDetails(repoName : String)
     }
 }

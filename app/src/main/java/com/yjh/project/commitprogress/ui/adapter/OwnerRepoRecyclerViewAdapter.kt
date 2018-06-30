@@ -3,14 +3,15 @@ package com.yjh.project.commitprogress.ui.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.omjoonkim.project.interviewtask.model.Repo
+import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.ui.viewholder.OwnerRepoViewHolder
 
 
-class OwnerRepoRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoContract.onRepositoryListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var repositories = mutableListOf<Repo>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = OwnerRepoViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = OwnerRepoViewHolder(parent,repositoryListener)
 
     fun setList(repositories: List<Repo>){
         this.repositories= repositories.toMutableList()
