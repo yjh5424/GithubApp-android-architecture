@@ -18,7 +18,6 @@ class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.U
                 .subscribe {response -> response.sortedByDescending{ repo -> repo.stargazersCount }.let { view.showRepositories(it)  }}
     }
 
-
     override fun openRepositoriesDetails(repoName: String) {
         view.moveRepositoryDetailUi(repoName)
     }
