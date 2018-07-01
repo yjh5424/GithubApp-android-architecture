@@ -3,4 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="github_client_id">37bc54f3e519696e6481</string>
+    <string name="github_redirect_url">commitprogress.firebaseapp.com/__/auth/handler</string>
 </resources>

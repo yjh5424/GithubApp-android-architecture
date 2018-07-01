@@ -65,7 +65,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
 
     // OkHttp && logger
-    implementation 'com.squareup.okhttp3:okhttp:3.4.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.2'
 
     // RxJava2
@@ -76,7 +76,11 @@ dependencies {
     implementation 'com.jakewharton.rxbinding:rxbinding:0.3.0'
 
     //firebase
-    compile 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+
+    //login github with firebase
+    implementation 'com.google.firebase:firebase-auth:15.0.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
