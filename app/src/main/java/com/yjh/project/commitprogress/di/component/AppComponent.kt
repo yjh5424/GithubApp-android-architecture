@@ -3,6 +3,7 @@ package com.yjh.project.commitprogress.di.component
 import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.di.module.AppModule
 import com.yjh.project.commitprogress.di.module.NetworkModule
+import com.yjh.project.commitprogress.presenter.login.LoginPresenter
 import com.yjh.project.commitprogress.presenter.main.MainPresenter
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
 import com.yjh.project.commitprogress.presenter.teamRepo.TeamRepoPresenter
@@ -18,6 +19,8 @@ interface AppComponent{
     fun inject(app: App)
 
     fun inject(mainPresenter: MainPresenter)
+
+    fun inject(loginPresenter: LoginPresenter)
 
     fun inject(ownerRepoPresenter: OwnerRepoPresenter)
 

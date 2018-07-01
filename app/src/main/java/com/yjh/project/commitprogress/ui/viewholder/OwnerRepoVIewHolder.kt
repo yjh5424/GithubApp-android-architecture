@@ -15,7 +15,6 @@ class OwnerRepoViewHolder(val parent: ViewGroup,private val repositoryListener: 
     private val repoLanguageTextView = itemView.findViewById<TextView>(R.id.language)
 
     fun bindTo(repoName: String, repoDesc: String?, language: String?, repoStar: Int) {
-        //Picasso.with(parent.context).load(stringToUri(imageUrl)).into(repoImageView)
         repoNameTextView.text = repoName
         repoDescTextView.text = repoDesc ?: ""
         repoStarTextView.text = repoStar.toString()
