@@ -28,9 +28,7 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
         }
     })
 
-    companion object {
-        fun newInstance() = OwnerRepoFragment()
-    }
+    companion object { fun newInstance() = OwnerRepoFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

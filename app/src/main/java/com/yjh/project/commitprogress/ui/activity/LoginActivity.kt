@@ -8,7 +8,7 @@ import com.yjh.project.commitprogress.presenter.login.LoginContract
 import com.yjh.project.commitprogress.presenter.login.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() , LoginContract.View{
+class LoginActivity : BaseActivity() , LoginContract.View{
 
     lateinit var userActionListener: LoginContract.UserActionListener
 
@@ -24,10 +24,6 @@ class LoginActivity : AppCompatActivity() , LoginContract.View{
     }
 
     override fun moveMainActivity() {
-        Intent(applicationContext,MainActivity::class.java).let {
-            startActivity(it)
-            finish()
-        }
+        startActivity(this,MainActivity::class.java)
     }
-
 }
