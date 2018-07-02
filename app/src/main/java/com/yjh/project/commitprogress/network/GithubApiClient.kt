@@ -9,16 +9,18 @@ import io.reactivex.schedulers.Schedulers
 
 class GithubApiClient(val githubApi: GithubApi) {
 
-   fun getAccessToken(clientId : String,clientSercret : String,code : String,redirectUri : String) : Single<AccessToken> =
-           githubApi.getAccessToken(clientId,clientSercret,code,redirectUri)
+   fun getAccessToken(clientId : String,clientSercret : String,code : String,redirectUri : String,state : String) : Single<AccessToken> =
+           githubApi.getAccessToken(clientId,clientSercret,code,redirectUri,state)
                    .subscribeOn(Schedulers.io())
                    .observeOn(AndroidSchedulers.mainThread())
 
    fun getUserRepo(userName : String) : Single<List<Repo>> =
-           githubApi.getUserRepos(userName).subscribeOn(Schedulers.io())
+           githubApi.getUserRepos(userName)
+                   .subscribeOn(Schedulers.io())
                    .observeOn(AndroidSchedulers.mainThread())
 
    fun getUserProfile(userName: String) : Single<Owner> =
-           githubApi.getUserProfile(userName).subscribeOn(Schedulers.io())
+           githubApi.getUserProfile(userName)
+                   .subscribeOn(Schedulers.io())
                    .observeOn(AndroidSchedulers.mainThread())
 }

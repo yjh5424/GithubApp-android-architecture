@@ -2,17 +2,15 @@ package com.yjh.project.commitprogress.ui.activity
 
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.yjh.project.commitprogress.R
-import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.presenter.login.LoginContract
 import com.yjh.project.commitprogress.presenter.login.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.HttpUrl
-import java.math.BigInteger
-import java.util.*
+
 
 class LoginActivity : BaseActivity() , LoginContract.View{
 
@@ -41,25 +39,21 @@ class LoginActivity : BaseActivity() , LoginContract.View{
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
+    override fun onResume() {
+        super.onResume()
 
-        intent?.let {
-            val code = intent.getStringExtra("code")
-            val state = intent.getStringExtra("state")
 
-            if (code != null && state != null) {
-                userActionListener.loadGithubToken(mAuth,code,state)
-            }
+        val code = intent!!.getStringExtra("code")
+        val state = intent!!.getStringExtra("state")
+
+        Log.d("RedirectedActivity", "code != null && state != null");
+
+        if (code != null && state != null) {
+            userActionListener.loadGithubToken(mAuth, code, state)
         }
-
-
     }
 
     override fun moveMainActivity() {
         startActivity(this,MainActivity::class.java)
     }
-
-
-
 }

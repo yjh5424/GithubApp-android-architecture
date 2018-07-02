@@ -4,11 +4,12 @@ import com.yjh.project.commitprogress.network.GithubApiClient
 
 class GithubDataRepository(val githubApiClient: GithubApiClient) {
 
-    fun getAccessToken(clientId : String,clientSercret : String,code : String,redirectUri : String) = githubApiClient.getAccessToken(
+    fun getAccessToken(clientId : String,clientSercret : String,code : String,redirectUri : String,state : String) = githubApiClient.getAccessToken(
             clientId,
             clientSercret,
             code,
-            redirectUri
+            redirectUri,
+            state
     )
 
     fun getUserRepo(userName : String) = githubApiClient.getUserRepo(userName)
