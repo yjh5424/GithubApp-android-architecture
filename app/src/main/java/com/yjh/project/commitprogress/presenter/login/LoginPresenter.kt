@@ -21,6 +21,7 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
     lateinit var githubDataRepository: GithubDataRepository
 
     override fun loginWithGithub(mAuth: FirebaseAuth, accessToken: AccessToken) {
+
         val credential = GithubAuthProvider.getCredential(accessToken.accessToken)
 
         mAuth.signInWithCredential(credential).addOnCompleteListener {
@@ -40,7 +41,7 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
                 .addQueryParameter("client_id",App.CLIENT_ID)
                 .addQueryParameter("redirect_uri", App.redirect_uri)
                 .addQueryParameter("state", getRandomString())
-                .addQueryParameter("scope", "user")
+                .addQueryParameter("scope", "user:email")
                 .build()
 
         view.moveGithubWebView(httpUrl)
@@ -49,7 +50,6 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
     override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
         githubDataRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
                 .subscribe { response-> loginWithGithub(mAuth,response) }
-
     }
 
     private fun getRandomString(): String = BigInteger(130, Random()).toString(32)

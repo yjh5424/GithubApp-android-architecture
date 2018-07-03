@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.yjh.project.commitprogress.R
+import com.yjh.project.commitprogress.domain.model.AccessToken
 import com.yjh.project.commitprogress.presenter.login.LoginContract
 import com.yjh.project.commitprogress.presenter.login.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
@@ -31,7 +32,6 @@ class LoginActivity : BaseActivity() , LoginContract.View{
         }
     }
 
-
     override fun moveGithubWebView(okHttpUrl: HttpUrl) {
         Intent(Intent.ACTION_VIEW, Uri.parse(okHttpUrl.toString())).let {
             startActivity(it)
@@ -46,10 +46,16 @@ class LoginActivity : BaseActivity() , LoginContract.View{
         val code = intent!!.getStringExtra("code")
         val state = intent!!.getStringExtra("state")
 
-        Log.d("RedirectedActivity", "code != null && state != null");
 
         if (code != null && state != null) {
-            userActionListener.loadGithubToken(mAuth, code, state)
+
+            Log.d("RedirectedActivity", "code != null && state != null")
+
+            userActionListener.loadGithubToken(
+                mAuth,
+                code,
+                state
+            )
         }
     }
 
