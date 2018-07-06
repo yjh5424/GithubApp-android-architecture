@@ -16,12 +16,8 @@ import javax.inject.Inject
 class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.UserActionsListener{
 
     @Inject lateinit var githubDataRepository: GithubDataRepository
-    var data = listOf<Pair<Repo,List<Person>>>()
 
-    init {
-        App.component.inject(this)
-    }
-
+    init { App.component.inject(this) }
 
     override fun loadRepositories(userName : String) {
         githubDataRepository.getUserRepo(userName)
@@ -30,7 +26,7 @@ class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.U
                             .flatMap {
                                 Observable.zip(
                                         Observable.just(it),
-                                        githubDataRepository.getStargazers(it.owner.name,it.name),
+                                        githubDataRepository.getStargazers(it.owner.login,it.name),
                                         BiFunction<Repo,List<Person>, Pair<Repo,List<Person>>>{
                                             t1, t2 ->  Pair(t1,t2)
                                         })
@@ -38,12 +34,12 @@ class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.U
                 }
                 .toList()
                 .subscribe {
-                    repo -> view.showRepositories(repo)
-                    Log.d("test",repo[0].second.size.toString())
+                    repo -> view.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
                 }
     }
 
     override fun openRepositoriesDetails(repoName: String) {
         view.moveRepositoryDetailUi(repoName)
     }
+
 }

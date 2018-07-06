@@ -16,8 +16,9 @@ interface OwnerRepoContract{
         fun moveRepositoryDetailUi(repoName: String)
     }
 
-    interface OnRepositoryListener{
+    interface OnViewHolderListener{
         fun onRepositoryClick(repoName: String)
+        fun onStargazersClick(person : Person)
     }
 
     interface UserActionsListener{

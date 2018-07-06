@@ -24,13 +24,17 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
 
     private val  ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
-    private val  repositoryClick=(object: OwnerRepoContract.OnRepositoryListener{
+    companion object { fun newInstance() = OwnerRepoFragment() }
+
+    private val  repositoryClick=(object: OwnerRepoContract.OnViewHolderListener{
         override fun onRepositoryClick(repoName: String) {
             mActionsListener.openRepositoriesDetails(repoName)
         }
-    })
 
-    companion object { fun newInstance() = OwnerRepoFragment() }
+        override fun onStargazersClick(person: Person) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

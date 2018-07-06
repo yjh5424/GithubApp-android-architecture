@@ -6,7 +6,7 @@ import android.widget.TextView
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 
-class OwnerRepoViewHolder(val parent: ViewGroup,private val repositoryListener: OwnerRepoContract.OnRepositoryListener) : BaseViewHolder(
+class OwnerRepoViewHolder(val parent: ViewGroup,private val listener: OwnerRepoContract.OnViewHolderListener) : BaseViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_owner_repo, parent, false)){
 
     private val repoNameTextView = itemView.findViewById<TextView>(R.id.name)
@@ -21,7 +21,7 @@ class OwnerRepoViewHolder(val parent: ViewGroup,private val repositoryListener: 
         repoLanguageTextView.text = language ?: ""
 
         itemView.setOnClickListener{
-            repositoryListener.onRepositoryClick(repoName)
+            listener.onRepositoryClick(repoName)
         }
     }
 }
