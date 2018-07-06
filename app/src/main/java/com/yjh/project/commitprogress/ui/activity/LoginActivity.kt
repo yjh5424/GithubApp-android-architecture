@@ -42,15 +42,11 @@ class LoginActivity : BaseActivity() , LoginContract.View{
     override fun onResume() {
         super.onResume()
 
-
         val code = intent!!.getStringExtra("code")
         val state = intent!!.getStringExtra("state")
 
-
         if (code != null && state != null) {
-
             Log.d("RedirectedActivity", "code != null && state != null")
-
             userActionListener.loadGithubToken(
                 mAuth,
                 code,

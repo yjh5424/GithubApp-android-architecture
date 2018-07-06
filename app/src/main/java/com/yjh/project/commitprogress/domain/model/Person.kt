@@ -2,7 +2,7 @@ package com.omjoonkim.project.interviewtask.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Owner(
+data class Person(
         val id: Long,
         val name: String,
         val company : String?,

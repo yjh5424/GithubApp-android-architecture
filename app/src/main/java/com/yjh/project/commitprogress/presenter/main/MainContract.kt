@@ -1,10 +1,10 @@
 package com.yjh.project.commitprogress.presenter.main
 
-import com.omjoonkim.project.interviewtask.model.Owner
+import com.omjoonkim.project.interviewtask.model.Person
 
 interface MainContract {
     interface View {
-        fun showProfile(owner: Owner)
+        fun showProfile(person: Person)
     }
 
     interface UserActionsListener {

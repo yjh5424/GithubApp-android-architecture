@@ -14,5 +14,8 @@ class GithubDataRepository(val githubApiClient: GithubApiClient) {
 
     fun getUserRepo(userName : String) = githubApiClient.getUserRepo(userName)
 
+    fun getStargazers(userName: String,repoName : String) =githubApiClient.getStargazers(userName,repoName)
+
     fun getUserProfile(userName : String) = githubApiClient.getUserProfile(userName)
+
 }

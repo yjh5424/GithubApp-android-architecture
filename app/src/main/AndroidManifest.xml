@@ -14,25 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".ui.activity.LoginActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.OwnerRepositoryDetailActivity" />
+        <activity android:name=".ui.activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.OwnerRepositoryDetailActivity" />
-        <activity android:name=".ui.activity.MainActivity" />
+
+
         <activity android:name=".ui.activity.BaseActivity" />
         <activity android:name=".ui.activity.RedirectedActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:host="yjh.com"
-                    android:scheme="http"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="callback"
+                    android:scheme="commitprogress"/>
             </intent-filter>
         </activity>
     </application>

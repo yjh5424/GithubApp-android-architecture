@@ -8,5 +8,5 @@ data class Repo(
         val description: String? = null,
         @SerializedName("stargazers_count") val stargazersCount: Int,
         val language : String?,
-        val owner: Owner
+        val owner: Person
 )

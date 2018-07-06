@@ -15,7 +15,8 @@ class App : Application() {
         val BASE_URL="https://api.github.com/"
         val CLIENT_ID="37bc54f3e519696e6481"
         val CLIENT_SECRET="096479e54c7c370d7aa27b56ec873803e96feb4c"
-        val redirect_uri="http://yjh.com/commit"
+        val redirect_uri="commitprogress://callback"
+
     }
 
     override fun onCreate() {

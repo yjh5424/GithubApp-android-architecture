@@ -3,11 +3,13 @@ package com.yjh.project.commitprogress.ui.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
@@ -40,7 +42,8 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
         var rootView =inflater.inflate(R.layout.fragment_owner, container, false)
 
         with(rootView){
-            recyclerView.layoutManager =StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
+            //recyclerView.layoutManager =StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
+            recyclerView.layoutManager =GridLayoutManager(context,2)
             recyclerView.adapter=ownerRepoRecyclerViewAdapter
         }
 
@@ -48,7 +51,7 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
         return rootView
     }
 
-    override fun showRepositories(repositories: List<Repo>) {
+    override fun showRepositories(repositories: List<Pair<Repo,List<Person>>>) {
         ownerRepoRecyclerViewAdapter.setList(repositories)
     }
 

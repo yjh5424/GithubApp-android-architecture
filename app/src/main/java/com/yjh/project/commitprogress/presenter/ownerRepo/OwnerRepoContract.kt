@@ -2,6 +2,7 @@ package com.yjh.project.commitprogress.presenter.ownerRepo
 
 import android.app.Application
 import android.content.Context
+import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 
 interface OwnerRepoContract{
@@ -10,7 +11,7 @@ interface OwnerRepoContract{
 
 
         // UserActionsListener 안의 loadRepositories 함수로 어댑터에 세팅
-        fun showRepositories(repositories: List<Repo>)
+        fun showRepositories(repositories: List<Pair<Repo,List<Person>>>)
 
         fun moveRepositoryDetailUi(repoName: String)
     }

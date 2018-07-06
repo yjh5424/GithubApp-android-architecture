@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.omjoonkim.project.interviewtask.model.Owner
+import com.omjoonkim.project.interviewtask.model.Person
 import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.main.MainContract
@@ -46,13 +46,13 @@ class MainActivity : BaseActivity() , MainContract.View{
         override fun getCount(): Int = fragments.size
     }
 
-    override fun showProfile(owner: Owner) {
-        Picasso.with(applicationContext).load(stringToUri(owner.avatar)).into(avatar)
-        name.text=owner.name
-        login.text=owner.login
-        location.text=owner.location ?: ""
-        email.text=owner.email ?: ""
-        team.text=owner.company ?: ""
+    override fun showProfile(person: Person) {
+        Picasso.with(applicationContext).load(stringToUri(person.avatar)).into(avatar)
+        name.text=person.name
+        login.text=person.login
+        location.text=person.location ?: ""
+        email.text=person.email ?: ""
+        team.text=person.company ?: ""
     }
 
 }
