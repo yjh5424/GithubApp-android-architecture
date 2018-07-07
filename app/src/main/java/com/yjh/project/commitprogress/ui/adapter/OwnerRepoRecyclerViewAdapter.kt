@@ -1,12 +1,14 @@
 package com.yjh.project.commitprogress.ui.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.ViewGroup
 import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.ui.viewholder.OwnerRepoViewHolder
 import com.yjh.project.commitprogress.ui.viewholder.OwnerStargazerViewHolder
+import com.yjh.project.commitprogress.ui.viewholder.OwnerStargazersViewHolder
 
 class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoContract.OnViewHolderListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -36,10 +38,10 @@ class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoCont
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        var repo = repositories[position/2]
-
         when (holder) {
             is OwnerRepoViewHolder -> {
+                var repo = repositories[position/2]
+
                 holder.apply {
                     bindTo(
                             repo.first.name,
@@ -50,17 +52,21 @@ class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoCont
                 }
 
             }
-            is OwnerStargazerViewHolder -> {
+            is OwnerStargazersViewHolder -> {
+                var repo = repositories[(position-1)/2]
 
+                Log.d("test",repo.second.size.toString())
+
+                holder.apply {
+                    setList(repo.second)
+                }
             }
         }
     }
 
-    override fun getItemCount(): Int =repositories.size * 2
+    override fun getItemCount(): Int = repositories.size * 2
 
     override fun getItemViewType(position: Int): Int = position % 2
-
-
 
 
 }

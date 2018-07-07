@@ -12,14 +12,14 @@ import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 class OwnerStargazerViewHolder(val parent: ViewGroup, private val listener: OwnerRepoContract.OnViewHolderListener) : BaseViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_owner_stargzer, parent, false)){
 
-    private val stargzerImageView = itemView.findViewById<ImageView>(R.id.avatar)
-    private val stargzerTextView = itemView.findViewById<TextView>(R.id.name)
+    private val stargazerImageView = itemView.findViewById<ImageView>(R.id.avatar)
+    private val stargazerTextView = itemView.findViewById<TextView>(R.id.name)
 
 
     fun bindTo(person: Person?) {
         person?.let {
-            stargzerTextView.text=person.name?: ""
-            Picasso.with(parent.context).load(stringToUri(person.avatar)).into(stargzerImageView)
+            stargazerTextView.text=person.name?: ""
+            Picasso.with(parent.context).load(stringToUri(person.avatar)).into(stargazerImageView)
             itemView.setOnClickListener{
                 listener.onStargazersClick(person!!)
             }
