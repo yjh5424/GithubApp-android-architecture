@@ -16,7 +16,7 @@ class OwnerStargazersViewHolder(val parent: ViewGroup, private val listener: Own
 
     init {
         itemView.recyclerView.adapter=ownerStarRecyclerViewAdapter
-        itemView.recyclerView.layoutManager= LinearLayoutManager(parent.context)
+        itemView.recyclerView.layoutManager= LinearLayoutManager(parent.context,LinearLayoutManager.HORIZONTAL,false)
     }
 
     fun setList(people : List<Person>) {

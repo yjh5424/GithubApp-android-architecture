@@ -41,5 +41,4 @@ class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.U
     override fun openRepositoriesDetails(repoName: String) {
         view.moveRepositoryDetailUi(repoName)
     }
-
 }

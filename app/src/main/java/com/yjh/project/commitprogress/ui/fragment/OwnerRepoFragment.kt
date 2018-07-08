@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +46,7 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
 
         with(rootView){
             //recyclerView.layoutManager =StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
-            recyclerView.layoutManager =GridLayoutManager(context,2)
+            recyclerView.layoutManager =LinearLayoutManager(context)
             recyclerView.adapter=ownerRepoRecyclerViewAdapter
         }
 

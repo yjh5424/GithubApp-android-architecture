@@ -25,7 +25,7 @@ class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoCont
                     repositoryListener
             )
         ViewType.STARGAZERS.ordinal ->
-            OwnerStargazerViewHolder(
+            OwnerStargazersViewHolder(
                     parent,
                     repositoryListener
             )
