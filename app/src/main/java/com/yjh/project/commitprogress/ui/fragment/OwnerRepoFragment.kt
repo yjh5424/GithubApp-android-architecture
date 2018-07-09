@@ -12,6 +12,7 @@ import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.main.MainContract
+import com.yjh.project.commitprogress.presenter.main.MainPresenter
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
 import com.yjh.project.commitprogress.ui.activity.OwnerRepositoryDetailActivity
@@ -19,17 +20,22 @@ import com.yjh.project.commitprogress.ui.adapter.OwnerRepoRecyclerViewAdapter
 import com.yjh.project.commitprogress.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_owner.view.*
 
-class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(), OwnerRepoContract.View {
+class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), OwnerRepoContract.View {
 
-    lateinit var mainPresenter : MainContract.UserActionsListener
+    lateinit var mainPresenter: MainContract.UserActionsListener
 
     companion object {
-        fun newInstance() = (OwnerRepoFragment() as Fragment)
+        fun newInstance(mainPresenter: MainContract.UserActionsListener) =
+                (OwnerRepoFragment()).apply { setMainAction(mainPresenter) }
     }
 
-    override val presenter:  OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
+    fun setMainAction(mainPresenter: MainContract.UserActionsListener){
+        this.mainPresenter=mainPresenter
+    }
 
-    private val  ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
+    override val presenter: OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
+
+    private val ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
     private val  repositoryClick=(object: OwnerRepoContract.OnViewHolderListener{
         override fun onRepositoryClick(repoName: String) {

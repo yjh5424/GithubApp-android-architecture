@@ -18,14 +18,11 @@ class OwnerStargazerViewHolder(
     private val stargazerTextView = itemView.findViewById<TextView>(R.id.name)
 
 
-    fun bindTo(person: Person?) {
-        person?.let {
+    fun bindTo(person: Person) {
             stargazerTextView.text=person.login
             Picasso.with(parent.context).load(stringToUri(person.avatar)).into(stargazerImageView)
             itemView.setOnClickListener{
-                //listener.onStargazersClick(person!!)
+                listener.onStargazersClick(person)
             }
-        }
-
     }
 }

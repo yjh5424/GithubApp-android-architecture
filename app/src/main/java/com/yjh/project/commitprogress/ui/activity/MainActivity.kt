@@ -21,18 +21,19 @@ class MainActivity : BaseActivity() , MainContract.View{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewPager.adapter = ViewPagerAdapter(supportFragmentManager)
-        tabLayout.setupWithViewPager(viewPager)
-
         mActionsListener=MainPresenter(this)
         mActionsListener.loadProfile("yjh5424")
 
+        viewPager.adapter = ViewPagerAdapter(supportFragmentManager,mActionsListener)
+        tabLayout.setupWithViewPager(viewPager)
+
+
     }
 
-    class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+    class ViewPagerAdapter(fragmentManager: FragmentManager,mainPresenter: MainContract.UserActionsListener) : FragmentPagerAdapter(fragmentManager) {
         private val fragments = listOf(
                 "My Repository" to lazy {
-                    OwnerRepoFragment.newInstance()
+                    OwnerRepoFragment.newInstance(mainPresenter)
                 },
                 "Team Repository" to lazy {
                     TeamRepoFragment.newInstance()
