@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_owner.view.*
 
 class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(),OwnerRepoContract.View {
 
-    companion object { fun newInstance() = OwnerRepoFragment() }
+    companion object { fun newInstance() = OwnerRepoFragment() as Fragment}
 
     override val presenter:  OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
 
