@@ -1,11 +1,13 @@
 package com.yjh.project.commitprogress.presenter.ownerRepo
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.presenter.base.BaseUserActionsListener
 import com.yjh.project.commitprogress.presenter.base.BaseView
+import com.yjh.project.commitprogress.presenter.main.MainContract
 
 interface OwnerRepoContract{
 
