@@ -6,8 +6,10 @@ import android.widget.TextView
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 
-class OwnerRepoViewHolder(val parent: ViewGroup,private val listener: OwnerRepoContract.OnViewHolderListener) : BaseViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_owner_repo, parent, false)){
+class OwnerRepoViewHolder(
+        val parent: ViewGroup,
+        private val listener: OwnerRepoContract.OnViewHolderListener
+) : BaseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_owner_repo, parent, false)){
 
     private val repoNameTextView = itemView.findViewById<TextView>(R.id.name)
     private val repoDescTextView = itemView.findViewById<TextView>(R.id.desc)

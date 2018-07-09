@@ -14,11 +14,13 @@ import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
 import com.yjh.project.commitprogress.ui.activity.OwnerRepositoryDetailActivity
 import com.yjh.project.commitprogress.ui.adapter.OwnerRepoRecyclerViewAdapter
+import com.yjh.project.commitprogress.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_owner.view.*
 
-class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
-
-    lateinit var mActionsListener: OwnerRepoContract.UserActionsListener
+class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(),OwnerRepoContract.View {
+    override val presenter:  OwnerRepoContract.UserActionsListener by lazy{
+        OwnerRepoPresenter(this)
+    }
 
     private val  ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
@@ -26,17 +28,16 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
 
     private val  repositoryClick=(object: OwnerRepoContract.OnViewHolderListener{
         override fun onRepositoryClick(repoName: String) {
-            mActionsListener.openRepositoriesDetails(repoName)
+            presenter.openRepositoriesDetails(repoName)
         }
 
         override fun onStargazersClick(person: Person) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
     })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mActionsListener = OwnerRepoPresenter(this)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +50,7 @@ class OwnerRepoFragment : Fragment(), OwnerRepoContract.View {
             recyclerView.adapter=ownerRepoRecyclerViewAdapter
         }
 
-        mActionsListener.loadRepositories("yjh5424")
+        presenter.loadRepositories("yjh5424")
         return rootView
     }
 

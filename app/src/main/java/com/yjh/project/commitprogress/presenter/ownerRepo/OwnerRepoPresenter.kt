@@ -1,19 +1,17 @@
 package com.yjh.project.commitprogress.presenter.ownerRepo
 
-import android.util.Log
 import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
 import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class OwnerRepoPresenter(val view: OwnerRepoContract.View) : OwnerRepoContract.UserActionsListener{
+class OwnerRepoPresenter(
+        val view: OwnerRepoContract.View
+) : OwnerRepoContract.UserActionsListener, BasePresenter(){
 
     @Inject lateinit var githubDataRepository: GithubDataRepository
 

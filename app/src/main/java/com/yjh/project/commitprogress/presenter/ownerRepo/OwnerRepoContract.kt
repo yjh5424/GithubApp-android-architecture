@@ -4,10 +4,12 @@ import android.app.Application
 import android.content.Context
 import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
+import com.yjh.project.commitprogress.presenter.base.BaseUserActionsListener
+import com.yjh.project.commitprogress.presenter.base.BaseView
 
 interface OwnerRepoContract{
 
-    interface View{
+    interface View : BaseView {
 
 
         // UserActionsListener 안의 loadRepositories 함수로 어댑터에 세팅
@@ -21,7 +23,7 @@ interface OwnerRepoContract{
         fun onStargazersClick(person : Person)
     }
 
-    interface UserActionsListener{
+    interface UserActionsListener : BaseUserActionsListener {
         //프레전터에서 상속받아서 구현
         fun loadRepositories(userName : String)
 

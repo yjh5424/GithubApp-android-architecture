@@ -9,8 +9,10 @@ import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 
-class OwnerStargazerViewHolder(val parent: ViewGroup, private val listener: OwnerRepoContract.OnViewHolderListener) : BaseViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_owner_stargzer, parent, false)){
+class OwnerStargazerViewHolder(
+        val parent: ViewGroup,
+        private val listener: OwnerRepoContract.OnViewHolderListener
+) : BaseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_owner_stargzer, parent, false)){
 
     private val stargazerImageView = itemView.findViewById<ImageView>(R.id.avatar)
     private val stargazerTextView = itemView.findViewById<TextView>(R.id.name)

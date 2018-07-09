@@ -9,8 +9,10 @@ import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.ui.adapter.OwnerStarRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_owner_stargzers.view.*
 
-class OwnerStargazersViewHolder(val parent: ViewGroup, private val listener: OwnerRepoContract.OnViewHolderListener) : BaseViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_owner_stargzers, parent, false)){
+class OwnerStargazersViewHolder(
+        val parent: ViewGroup,
+        private val listener: OwnerRepoContract.OnViewHolderListener
+) : BaseViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_owner_stargzers, parent, false)){
 
     private val  ownerStarRecyclerViewAdapter =OwnerStarRecyclerViewAdapter(listener)
 

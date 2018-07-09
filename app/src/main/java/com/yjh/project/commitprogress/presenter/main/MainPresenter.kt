@@ -5,7 +5,7 @@ import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
 import javax.inject.Inject
 
 
-class MainPresenter(val view : MainContract.View) : MainContract.UserActionsListener{
+class MainPresenter(val view : MainContract.View) : MainContract.UserActionsListener {
 
     init { App.component.inject(this)}
 
