@@ -43,7 +43,7 @@ class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), 
         }
 
         override fun onStargazersClick(person: Person) {
-            mainPresenter.openStargazerProfile(person)
+            mainPresenter.loadProfile(person.login)
         }
     })
 
