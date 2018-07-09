@@ -18,13 +18,12 @@ import com.yjh.project.commitprogress.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_owner.view.*
 
 class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(),OwnerRepoContract.View {
-    override val presenter:  OwnerRepoContract.UserActionsListener by lazy{
-        OwnerRepoPresenter(this)
-    }
-
-    private val  ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
     companion object { fun newInstance() = OwnerRepoFragment() }
+
+    override val presenter:  OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
+
+    private val  ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
     private val  repositoryClick=(object: OwnerRepoContract.OnViewHolderListener{
         override fun onRepositoryClick(repoName: String) {

@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class OwnerRepoPresenter(
         val view: OwnerRepoContract.View
-) : OwnerRepoContract.UserActionsListener, BasePresenter(){
+) : OwnerRepoContract.UserActionsListener{
 
     @Inject lateinit var githubDataRepository: GithubDataRepository
 
