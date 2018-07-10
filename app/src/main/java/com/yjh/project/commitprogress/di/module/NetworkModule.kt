@@ -8,8 +8,11 @@ import javax.inject.Singleton
 import dagger.Provides
 import com.google.gson.GsonBuilder
 import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
+import com.yjh.project.commitprogress.domain.Repository.GithubTokenRepository
 import com.yjh.project.commitprogress.network.GithubApi
 import com.yjh.project.commitprogress.network.GithubApiClient
+import com.yjh.project.commitprogress.network.GithubTokenApi
+import com.yjh.project.commitprogress.network.GithubTokenApiClient
 import dagger.Module
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
@@ -48,6 +51,26 @@ class NetworkModule(val mBaseUrl: String) {
                 .build()
                 .create(GithubApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun prvideGithubTokenApi(gson: Gson, okHttpClient: OkHttpClient) : GithubTokenApi{
+        return Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl("https://github.com/")
+                .client(okHttpClient)
+                .build()
+                .create(GithubTokenApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGithubTokenClient(githubTokenApi: GithubTokenApi) = GithubTokenApiClient(githubTokenApi)
+
+    @Provides
+    @Singleton
+    fun provideGithubTokenRepository(githubTokenApiClient: GithubTokenApiClient) = GithubTokenRepository(githubTokenApiClient)
 
     @Provides
     @Singleton

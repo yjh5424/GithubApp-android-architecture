@@ -41,7 +41,4 @@ class OwnerRepoPresenter(
     override fun openRepositoriesDetails(repoName: String) {
         view.moveRepositoryDetailUi(repoName)
     }
-
-
-
 }

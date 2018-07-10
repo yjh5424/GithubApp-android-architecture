@@ -29,7 +29,7 @@ class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), 
                 (OwnerRepoFragment()).apply { setMainAction(mainPresenter) }
     }
 
-    fun setMainAction(mainPresenter: MainContract.UserActionsListener){
+    private fun setMainAction(mainPresenter: MainContract.UserActionsListener){
         this.mainPresenter=mainPresenter
     }
 
@@ -37,7 +37,7 @@ class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), 
 
     private val ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
-    private val  repositoryClick=(object: OwnerRepoContract.OnViewHolderListener{
+    private val repositoryClick=(object: OwnerRepoContract.OnViewHolderListener{
         override fun onRepositoryClick(repoName: String) {
             presenter.openRepositoriesDetails(repoName)
         }

@@ -6,6 +6,7 @@ import com.google.firebase.auth.GithubAuthProvider
 import com.google.firebase.auth.AuthCredential
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
+import com.yjh.project.commitprogress.domain.Repository.GithubTokenRepository
 import com.yjh.project.commitprogress.domain.model.AccessToken
 import okhttp3.HttpUrl
 import java.math.BigInteger
@@ -18,7 +19,7 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
     init { App.component.inject(this) }
 
     @Inject
-    lateinit var githubDataRepository: GithubDataRepository
+    lateinit var githubTokenRepository: GithubTokenRepository
 
     override fun loginWithGithub(mAuth: FirebaseAuth, accessToken: AccessToken) {
 
@@ -41,14 +42,15 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
                 .addQueryParameter("client_id",App.CLIENT_ID)
                 .addQueryParameter("redirect_uri", App.redirect_uri)
                 .addQueryParameter("state", getRandomString())
-                .addQueryParameter("scope", "user:email")
+                .addQueryParameter("scope", "user")
+                .addQueryParameter("allow_signup","false")
                 .build()
 
         view.moveGithubWebView(httpUrl)
     }
 
     override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
-        githubDataRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
+        githubTokenRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
                 .subscribe { response-> loginWithGithub(mAuth,response) }
     }
 
