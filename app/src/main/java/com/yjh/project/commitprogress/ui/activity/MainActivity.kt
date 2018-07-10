@@ -10,6 +10,7 @@ import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.main.MainContract
 import com.yjh.project.commitprogress.presenter.main.MainPresenter
 import com.yjh.project.commitprogress.ui.fragment.OwnerRepoFragment
+import com.yjh.project.commitprogress.ui.fragment.SettingFragment
 import com.yjh.project.commitprogress.ui.fragment.TeamRepoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,6 +38,9 @@ class MainActivity : BaseActivity() , MainContract.View{
                 },
                 "Team Repository" to lazy {
                     TeamRepoFragment.newInstance()
+                },
+                "Setting" to lazy {
+                    SettingFragment.newInstance()
                 }
         )
 

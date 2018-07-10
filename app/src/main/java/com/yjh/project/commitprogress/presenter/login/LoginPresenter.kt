@@ -1,10 +1,12 @@
 package com.yjh.project.commitprogress.presenter.login
 
+import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.yjh.project.commitprogress.di.app.App
 import com.google.firebase.auth.GithubAuthProvider
 import com.google.firebase.auth.AuthCredential
 import com.yjh.project.commitprogress.R
+import com.yjh.project.commitprogress.di.module.AppModule
 import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
 import com.yjh.project.commitprogress.domain.Repository.GithubTokenRepository
 import com.yjh.project.commitprogress.domain.model.AccessToken
@@ -21,14 +23,18 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
     @Inject
     lateinit var githubTokenRepository: GithubTokenRepository
 
+    @Inject
+    lateinit var sharedPreferences : SharedPreferences
+
     override fun loginWithGithub(mAuth: FirebaseAuth, accessToken: AccessToken) {
 
         val credential = GithubAuthProvider.getCredential(accessToken.accessToken)
 
-        mAuth.signInWithCredential(credential).addOnCompleteListener {
-            it -> if(it.isSuccessful){
+        mAuth.signInWithCredential(credential).addOnCompleteListener { it ->
+            if (it.isSuccessful) {
                 view.moveMainActivity()
-                var v=it.result
+                // github 사용자 고유 id 저장
+                sharedPreferences.edit().putString(AppModule.USER_ID_KEY,it.result.additionalUserInfo.providerId).commit()
             }
         }
     }

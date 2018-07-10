@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class AppModule(private val app: Application) {
 
     companion object {
-        private val USER_ID_KEY = "github_user_id"
+        val USER_ID_KEY = "github_user_id"
     }
 
     @Provides
