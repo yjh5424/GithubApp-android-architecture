@@ -28,6 +28,7 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
         mAuth.signInWithCredential(credential).addOnCompleteListener {
             it -> if(it.isSuccessful){
                 view.moveMainActivity()
+                var v=it.result
             }
         }
     }

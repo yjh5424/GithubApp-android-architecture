@@ -54,7 +54,7 @@ class NetworkModule(val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    fun prvideGithubTokenApi(gson: Gson, okHttpClient: OkHttpClient) : GithubTokenApi{
+    fun provideGithubTokenApi(gson: Gson, okHttpClient: OkHttpClient) : GithubTokenApi{
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
