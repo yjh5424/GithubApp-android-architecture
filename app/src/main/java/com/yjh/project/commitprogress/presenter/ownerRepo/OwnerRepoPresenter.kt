@@ -20,19 +20,7 @@ class OwnerRepoPresenter(
     init { App.component.inject(this) }
 
     override fun loadRepositories(userName : String) {
-        githubDataRepository.getUserRepo(userName)
-                .flatMap{
-                    Observable.fromIterable(it)
-                            .flatMap {
-                                Observable.zip(
-                                        Observable.just(it),
-                                        githubDataRepository.getStargazers(it.owner.login,it.name),
-                                        BiFunction<Repo,List<Person>, Pair<Repo,List<Person>>>{
-                                            t1, t2 ->  Pair(t1,t2)
-                                        })
-                            }
-                }
-                .toList()
+        githubDataRepository.getRepositories(userName)
                 .subscribe {
                     repo -> view.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
                 }
@@ -41,4 +29,10 @@ class OwnerRepoPresenter(
     override fun openRepositoriesDetails(repoName: String) {
         view.moveRepositoryDetailUi(repoName)
     }
+
+    override fun onClear() {
+
+    }
+
+
 }

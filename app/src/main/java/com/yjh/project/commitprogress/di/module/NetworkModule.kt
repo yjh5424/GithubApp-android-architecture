@@ -9,6 +9,7 @@ import dagger.Provides
 import com.google.gson.GsonBuilder
 import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
 import com.yjh.project.commitprogress.domain.Repository.GithubTokenRepository
+import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
 import com.yjh.project.commitprogress.network.GithubApi
 import com.yjh.project.commitprogress.network.GithubApiClient
 import com.yjh.project.commitprogress.network.GithubTokenApi
@@ -78,5 +79,5 @@ class NetworkModule(val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    fun provideGithubDataRepository(githubApiClient: GithubApiClient) = GithubDataRepository(githubApiClient)
+    fun provideGithubDataRepository(githubApiClient: GithubApiClient) = UserDataNetworkRepository(githubApiClient)
 }

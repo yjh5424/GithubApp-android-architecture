@@ -24,6 +24,8 @@ class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), 
 
     lateinit var mainPresenter: MainContract.UserActionsListener
 
+    override val presenter: OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
+
     companion object {
         fun newInstance(mainPresenter: MainContract.UserActionsListener) =
                 (OwnerRepoFragment()).apply { setMainAction(mainPresenter) }
@@ -32,8 +34,6 @@ class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), 
     private fun setMainAction(mainPresenter: MainContract.UserActionsListener){
         this.mainPresenter=mainPresenter
     }
-
-    override val presenter: OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
 
     private val ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
