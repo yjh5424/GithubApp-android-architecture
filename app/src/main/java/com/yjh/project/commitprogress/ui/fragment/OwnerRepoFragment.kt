@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
+import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.main.MainContract
 import com.yjh.project.commitprogress.presenter.main.MainPresenter
@@ -20,48 +21,54 @@ import com.yjh.project.commitprogress.ui.adapter.OwnerRepoRecyclerViewAdapter
 import com.yjh.project.commitprogress.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_owner.view.*
 
-class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), OwnerRepoContract.View {
+class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(), OwnerRepoContract.View {
 
-    lateinit var mainPresenter: MainContract.UserActionsListener
+
+    companion object {
+        fun newInstance(id: String) =
+                OwnerRepoFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("id", id)
+                    }
+                }
+    }
+
+    lateinit var userID: String
 
     override val presenter: OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
 
-    companion object {
-        fun newInstance(mainPresenter: MainContract.UserActionsListener) =
-                (OwnerRepoFragment()).apply { setMainAction(mainPresenter) }
-    }
-
-    private fun setMainAction(mainPresenter: MainContract.UserActionsListener){
-        this.mainPresenter=mainPresenter
-    }
-
     private val ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
-    private val repositoryClick=(object: OwnerRepoContract.OnViewHolderListener{
+    private val repositoryClick = (object : OwnerRepoContract.OnViewHolderListener {
         override fun onRepositoryClick(repoName: String) {
             presenter.openRepositoriesDetails(repoName)
         }
 
         override fun onStargazersClick(person: Person) {
-            mainPresenter.loadProfile(person.login)
+            presenter.loadProfile(person.login)
         }
     })
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        var rootView =inflater.inflate(R.layout.fragment_owner, container, false)
-
-        with(rootView){
-            //recyclerView.layoutManager =StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
-            recyclerView.layoutManager =LinearLayoutManager(context)
-            recyclerView.adapter=ownerRepoRecyclerViewAdapter
-        }
-
-        presenter.loadRepositories("yjh5424")
-        return rootView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let { userID = it.getString("id") }
     }
 
-    override fun showRepositories(repositories: List<Pair<Repo,List<Person>>>) {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_owner, container, false)
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.recyclerView.layoutManager = LinearLayoutManager(context)
+        view.recyclerView.adapter = ownerRepoRecyclerViewAdapter
+
+        presenter.loadRepositories(userID)
+        presenter.loadProfile(userID)
+    }
+
+    override fun showRepositories(repositories: List<Pair<Repo, List<Person>>>) {
         ownerRepoRecyclerViewAdapter.setList(repositories)
     }
 
@@ -70,4 +77,17 @@ class OwnerRepoFragment: BaseFragment<OwnerRepoContract.UserActionsListener>(), 
             startActivity(it)
         }
     }
+
+    override fun showProfile(person: Person) {
+        with(view!!.rootView){
+            Picasso.with(context).load(stringToUri(person.avatar)).into(avatar)
+            name.text=person.name
+            login.text=person.login
+            location.text=person.location ?: ""
+            email.text=person.email ?: ""
+            team.text=person.company ?: ""
+        }
+
+    }
+
 }

@@ -17,24 +17,27 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() , MainContract.View{
 
     lateinit var mActionsListener: MainContract.UserActionsListener
+    lateinit var userID : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         mActionsListener=MainPresenter(this)
-        mActionsListener.loadProfile("yjh5424")
+       // mActionsListener.loadProfile("yjh5424")
 
-        viewPager.adapter = ViewPagerAdapter(supportFragmentManager,mActionsListener)
+        userID=intent.getStringExtra("id")
+
+        viewPager.adapter = ViewPagerAdapter(supportFragmentManager,userID)
         tabLayout.setupWithViewPager(viewPager)
 
 
     }
 
-    class ViewPagerAdapter(fragmentManager: FragmentManager,mainPresenter: MainContract.UserActionsListener) : FragmentPagerAdapter(fragmentManager) {
+    class ViewPagerAdapter(fragmentManager: FragmentManager,id : String) : FragmentPagerAdapter(fragmentManager) {
         private val fragments = listOf(
                 "My Repository" to lazy {
-                    OwnerRepoFragment.newInstance(mainPresenter)
+                    OwnerRepoFragment.newInstance(id)
                 },
                 "Team Repository" to lazy {
                     TeamRepoFragment.newInstance()
@@ -49,15 +52,6 @@ class MainActivity : BaseActivity() , MainContract.View{
         override fun getItem(position: Int): Fragment = fragments[position].second.value
 
         override fun getCount(): Int = fragments.size
-    }
-
-    override fun showProfile(person: Person) {
-        Picasso.with(applicationContext).load(stringToUri(person.avatar)).into(avatar)
-        name.text=person.name
-        login.text=person.login
-        location.text=person.location ?: ""
-        email.text=person.email ?: ""
-        team.text=person.company ?: ""
     }
 
 }

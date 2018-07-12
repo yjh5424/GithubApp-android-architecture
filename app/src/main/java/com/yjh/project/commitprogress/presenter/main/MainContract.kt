@@ -7,12 +7,11 @@ import com.yjh.project.commitprogress.presenter.base.BaseView
 
 interface MainContract {
     interface View : BaseView {
-        fun showProfile(person: Person)
+
     }
 
 
     interface UserActionsListener : BaseUserActionsListener {
-        fun loadProfile(userName : String)
-        fun openStargazerProfile(person: Person)
+
     }
 }

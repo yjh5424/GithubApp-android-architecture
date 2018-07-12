@@ -7,15 +7,13 @@ import com.google.gson.Gson
 import javax.inject.Singleton
 import dagger.Provides
 import com.google.gson.GsonBuilder
-import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
-import com.yjh.project.commitprogress.domain.Repository.GithubTokenRepository
 import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
+import com.yjh.project.commitprogress.domain.Repository.UserTokenNetworkRepository
 import com.yjh.project.commitprogress.network.GithubApi
 import com.yjh.project.commitprogress.network.GithubApiClient
 import com.yjh.project.commitprogress.network.GithubTokenApi
 import com.yjh.project.commitprogress.network.GithubTokenApiClient
 import dagger.Module
-import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
@@ -71,7 +69,7 @@ class NetworkModule(val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    fun provideGithubTokenRepository(githubTokenApiClient: GithubTokenApiClient) = GithubTokenRepository(githubTokenApiClient)
+    fun provideUserTokenNetworkRepository(githubTokenApiClient: GithubTokenApiClient) = UserTokenNetworkRepository(githubTokenApiClient)
 
     @Provides
     @Singleton
@@ -79,5 +77,5 @@ class NetworkModule(val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    fun provideGithubDataRepository(githubApiClient: GithubApiClient) = UserDataNetworkRepository(githubApiClient)
+    fun provideUserDataNetworkRepository(githubApiClient: GithubApiClient) = UserDataNetworkRepository(githubApiClient)
 }

@@ -55,7 +55,11 @@ class LoginActivity : BaseActivity() , LoginContract.View{
         }
     }
 
-    override fun moveMainActivity() {
-        startActivity(this,MainActivity::class.java)
+    override fun moveMainActivity(id : String) {
+        Intent(applicationContext,MainActivity::class.java).let {
+            it.putExtra("id",id)
+            startActivity(it)
+            finish()
+        }
     }
 }

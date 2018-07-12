@@ -7,8 +7,8 @@ import com.google.firebase.auth.GithubAuthProvider
 import com.google.firebase.auth.AuthCredential
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.di.module.AppModule
-import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
-import com.yjh.project.commitprogress.domain.Repository.GithubTokenRepository
+import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
+import com.yjh.project.commitprogress.domain.Repository.UserTokenNetworkRepository
 import com.yjh.project.commitprogress.domain.model.AccessToken
 import okhttp3.HttpUrl
 import java.math.BigInteger
@@ -21,10 +21,16 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
     init { App.component.inject(this) }
 
     @Inject
-    lateinit var githubTokenRepository: GithubTokenRepository
+    lateinit var userTokenNetworkRepository: UserTokenNetworkRepository
 
     @Inject
     lateinit var sharedPreferences : SharedPreferences
+
+
+    override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
+        userTokenNetworkRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
+                .subscribe { response-> loginWithGithub(mAuth,response) }
+    }
 
     override fun loginWithGithub(mAuth: FirebaseAuth, accessToken: AccessToken) {
 
@@ -32,9 +38,9 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
 
         mAuth.signInWithCredential(credential).addOnCompleteListener { it ->
             if (it.isSuccessful) {
-                view.moveMainActivity()
-                // github 사용자 고유 id 저장
-                sharedPreferences.edit().putString(AppModule.USER_ID_KEY,it.result.additionalUserInfo.providerId).commit()
+                view.moveMainActivity(it.result.additionalUserInfo.username)
+                sharedPreferences.edit().putString(AppModule.USER_ID_KEY,it.result.user.uid).commit()
+                sharedPreferences.edit().clear()
             }
         }
     }
@@ -54,11 +60,6 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
                 .build()
 
         view.moveGithubWebView(httpUrl)
-    }
-
-    override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
-        githubTokenRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
-                .subscribe { response-> loginWithGithub(mAuth,response) }
     }
 
     private fun getRandomString(): String = BigInteger(130, Random()).toString(32)

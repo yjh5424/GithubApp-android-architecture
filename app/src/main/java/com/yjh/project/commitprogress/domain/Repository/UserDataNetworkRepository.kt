@@ -7,25 +7,19 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 
-class UserDataNetworkRepository(val githubApiClient: GithubApiClient) {
+class UserDataNetworkRepository(val githubApiClient: GithubApiClient) : UserDataRepository {
 
-/*
-    fun getUserRepo(userName : String)  = githubApiClient.getUserRepo(userName)
+    override fun getUserProfile(userName: String): Single<Person> = githubApiClient.getUserProfile(userName)
 
-    fun getStargazers(userName: String,repoName : String) =githubApiClient.getStargazers(userName,repoName)
-*/
-
-    fun getUserProfile(userName : String) = githubApiClient.getUserProfile(userName)
-
-    fun getRepositories(userName: String) : Single<List<Pair<Repo,List<Person>>>> = githubApiClient.getUserRepo(userName)
-            .flatMap{
+    override fun getRepositories(userName: String): Single<List<Pair<Repo, List<Person>>>> = githubApiClient.getUserRepo(userName)
+            .flatMap {
                 Observable.fromIterable(it)
                         .flatMap {
                             Observable.zip(
                                     Observable.just(it),
-                                    githubApiClient.getStargazers(it.owner.login,it.name),
-                                    BiFunction<Repo,List<Person>, Pair<Repo,List<Person>>>{
-                                        t1, t2 ->  Pair(t1,t2)
+                                    githubApiClient.getStargazers(it.owner.login, it.name),
+                                    BiFunction<Repo, List<Person>, Pair<Repo, List<Person>>> { t1, t2 ->
+                                        Pair(t1, t2)
                                     })
                         }
             }

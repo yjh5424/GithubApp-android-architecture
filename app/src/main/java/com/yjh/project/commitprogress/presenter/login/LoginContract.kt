@@ -10,7 +10,7 @@ import okhttp3.HttpUrl
 interface LoginContract{
 
     interface View : BaseView{
-        fun moveMainActivity()
+        fun moveMainActivity(id : String)
         fun moveGithubWebView(httpUrl: HttpUrl)
     }
 

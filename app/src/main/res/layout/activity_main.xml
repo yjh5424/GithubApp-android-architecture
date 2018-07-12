@@ -6,125 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
-
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/top_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_launcher_background" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text="name"
-            android:textSize="16sp"
-            android:textColor="@color/colorBlack"
-            app:layout_constraintLeft_toRightOf="@id/avatar"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="test"
-            android:textSize="12sp"
-            android:textColor="@color/colorBlack"
-            app:layout_constraintLeft_toRightOf="@id/avatar"
-            app:layout_constraintTop_toBottomOf="@id/name" />
-
-        <ImageView
-            android:id="@+id/team_icon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_people_black_24dp"
-            app:layout_constraintLeft_toRightOf="@+id/avatar"
-            app:layout_constraintTop_toBottomOf="@+id/login"
-            />
-
-        <TextView
-            android:id="@+id/team"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="test"
-            android:textColor="@color/colorBlack"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/team_icon"
-            app:layout_constraintTop_toBottomOf="@+id/login" />
-
-        <ImageView
-            android:id="@+id/location_icon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_location_on_black_24dp"
-            app:layout_constraintLeft_toRightOf="@+id/avatar"
-            app:layout_constraintTop_toBottomOf="@+id/team_icon"
-            />
-
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="test"
-            android:layout_marginTop="4dp"
-            android:textSize="12sp"
-            android:textColor="@color/colorBlack"
-            app:layout_constraintLeft_toRightOf="@id/location_icon"
-            app:layout_constraintTop_toBottomOf="@+id/team" />
-
-        <ImageView
-            android:id="@+id/email_icon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_email_black_24dp"
-            app:layout_constraintLeft_toRightOf="@+id/avatar"
-            app:layout_constraintTop_toBottomOf="@+id/location_icon"
-            />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="test"
-            android:layout_marginTop="4dp"
-            android:textSize="12sp"
-            android:textColor="@color/colorBlack"
-            app:layout_constraintLeft_toRightOf="@id/email_icon"
-            app:layout_constraintTop_toBottomOf="@+id/location" />
-
-
-    </android.support.constraint.ConstraintLayout>
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/top_layout"
         app:tabTextColor="#777777"
         />
 
@@ -134,8 +19,6 @@
         android:layout_height="0dp"
         android:background="#f5f5f5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="138dp" />
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
 </android.support.constraint.ConstraintLayout>

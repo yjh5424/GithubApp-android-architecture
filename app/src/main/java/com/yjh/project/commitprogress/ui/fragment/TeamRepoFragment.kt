@@ -29,6 +29,6 @@ class TeamRepoFragment : BaseFragment<TeamRepoContract.UserActionsListener>(), T
 
 
     companion object {
-        fun newInstance() = TeamRepoFragment()as Fragment
+        fun newInstance() = TeamRepoFragment()
     }
 }

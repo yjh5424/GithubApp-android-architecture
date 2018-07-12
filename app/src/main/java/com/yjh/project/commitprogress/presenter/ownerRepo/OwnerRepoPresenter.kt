@@ -4,7 +4,7 @@ import android.app.Activity
 import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.di.app.App
-import com.yjh.project.commitprogress.domain.Repository.GithubDataRepository
+import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
 import com.yjh.project.commitprogress.presenter.main.MainContract
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
@@ -15,12 +15,12 @@ class OwnerRepoPresenter(
         val view: OwnerRepoContract.View
 ) : OwnerRepoContract.UserActionsListener{
 
-    @Inject lateinit var githubDataRepository: GithubDataRepository
+    @Inject lateinit var userDataNetworkRepository: UserDataNetworkRepository
 
     init { App.component.inject(this) }
 
     override fun loadRepositories(userName : String) {
-        githubDataRepository.getRepositories(userName)
+        userDataNetworkRepository.getRepositories(userName)
                 .subscribe {
                     repo -> view.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
                 }
@@ -30,9 +30,12 @@ class OwnerRepoPresenter(
         view.moveRepositoryDetailUi(repoName)
     }
 
-    override fun onClear() {
-
+    override fun loadProfile(userName : String) {
+        userDataNetworkRepository.getUserProfile(userName)
+                .subscribe { response -> view.showProfile(response) }
     }
 
-
+    override fun openStargazerProfile(person: Person) {
+        view.showProfile(person)
+    }
 }
