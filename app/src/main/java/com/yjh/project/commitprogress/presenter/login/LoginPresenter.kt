@@ -4,10 +4,7 @@ import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.yjh.project.commitprogress.di.app.App
 import com.google.firebase.auth.GithubAuthProvider
-import com.google.firebase.auth.AuthCredential
-import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.di.module.AppModule
-import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
 import com.yjh.project.commitprogress.domain.Repository.UserTokenNetworkRepository
 import com.yjh.project.commitprogress.domain.model.AccessToken
 import okhttp3.HttpUrl

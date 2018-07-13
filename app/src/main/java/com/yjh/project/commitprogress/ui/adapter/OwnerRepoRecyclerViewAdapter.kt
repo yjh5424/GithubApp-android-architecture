@@ -7,7 +7,6 @@ import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.ui.viewholder.OwnerRepoViewHolder
-import com.yjh.project.commitprogress.ui.viewholder.OwnerStargazerViewHolder
 import com.yjh.project.commitprogress.ui.viewholder.OwnerStargazersViewHolder
 
 class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoContract.OnViewHolderListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -67,7 +66,5 @@ class OwnerRepoRecyclerViewAdapter(private val repositoryListener: OwnerRepoCont
     override fun getItemCount(): Int = repositories.size * 2
 
     override fun getItemViewType(position: Int): Int = position % 2
-
-
 }
 

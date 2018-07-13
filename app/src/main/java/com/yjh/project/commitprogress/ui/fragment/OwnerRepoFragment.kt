@@ -1,9 +1,7 @@
 package com.yjh.project.commitprogress.ui.fragment
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +10,6 @@ import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
-import com.yjh.project.commitprogress.presenter.main.MainContract
-import com.yjh.project.commitprogress.presenter.main.MainPresenter
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
 import com.yjh.project.commitprogress.ui.activity.OwnerRepositoryDetailActivity
@@ -23,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_owner.view.*
 
 class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(), OwnerRepoContract.View {
 
+    lateinit var userID: String
 
     companion object {
         fun newInstance(id: String) =
@@ -32,8 +29,6 @@ class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(),
                     }
                 }
     }
-
-    lateinit var userID: String
 
     override val presenter: OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
 
@@ -87,7 +82,5 @@ class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(),
             email.text=person.email ?: ""
             team.text=person.company ?: ""
         }
-
     }
-
 }

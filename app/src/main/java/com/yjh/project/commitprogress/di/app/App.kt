@@ -6,7 +6,6 @@ import com.yjh.project.commitprogress.di.component.DaggerAppComponent
 import com.yjh.project.commitprogress.di.module.AppModule
 import com.yjh.project.commitprogress.di.module.NetworkModule
 
-
 class App : Application() {
 
     companion object {

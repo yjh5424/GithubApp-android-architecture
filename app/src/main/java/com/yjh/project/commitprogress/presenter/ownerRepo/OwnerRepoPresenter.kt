@@ -1,13 +1,8 @@
 package com.yjh.project.commitprogress.presenter.ownerRepo
 
-import android.app.Activity
 import com.omjoonkim.project.interviewtask.model.Person
-import com.omjoonkim.project.interviewtask.model.Repo
 import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
-import com.yjh.project.commitprogress.presenter.main.MainContract
-import io.reactivex.Observable
-import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
 
