@@ -13,10 +13,17 @@ class OwnerRepoPresenter @Inject constructor(
 ) : BasePresenter<OwnerRepoContract.View>(disposable), OwnerRepoContract.UserActionsListener {
 
     override fun loadRepositories(userName: String) {
-        userDataNetworkRepository.getRepositories(userName)
-                .subscribe { repo ->
-                    view?.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
-                }
+
+        disposable.add(userDataNetworkRepository.getRepositories(userName)
+                .subscribe(
+                        { repo ->
+                             view?.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
+                        },
+                        {
+                            // error
+                        }
+                )
+        )
     }
 
     override fun openRepositoriesDetails(repoName: String) {
@@ -24,8 +31,13 @@ class OwnerRepoPresenter @Inject constructor(
     }
 
     override fun loadProfile(userName: String) {
-        userDataNetworkRepository.getUserProfile(userName)
-                .subscribe { response -> view?.showProfile(response) }
+        disposable.add(userDataNetworkRepository.getUserProfile(userName)
+                .subscribe(
+                        { response ->
+                            view?.showProfile(response)
+                        }
+                )
+        )
     }
 
     override fun openStargazerProfile(person: Person) {

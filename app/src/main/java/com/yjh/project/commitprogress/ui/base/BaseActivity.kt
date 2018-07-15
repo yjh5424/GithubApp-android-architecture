@@ -23,7 +23,6 @@ open class BaseActivity : AppCompatActivity(), BaseView {
         presenter?.detachView()
     }
 
-
     fun stringToUri(str: String) : Uri = Uri.parse(str)
 
 }
