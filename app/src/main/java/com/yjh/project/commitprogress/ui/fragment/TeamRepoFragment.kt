@@ -5,17 +5,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.teamRepo.TeamRepoContract
 import com.yjh.project.commitprogress.presenter.teamRepo.TeamRepoPresenter
 import com.yjh.project.commitprogress.ui.base.BaseFragment
 
-class TeamRepoFragment : BaseFragment<TeamRepoContract.UserActionsListener>(), TeamRepoContract.View {
-    override val presenter: TeamRepoContract.UserActionsListener  by lazy{
-        TeamRepoPresenter(this)
-    }
-
+class TeamRepoFragment : BaseFragment(), TeamRepoContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
