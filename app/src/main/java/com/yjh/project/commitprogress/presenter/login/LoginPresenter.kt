@@ -21,14 +21,6 @@ class LoginPresenter @Inject constructor(
         disposable: CompositeDisposable
 ) : LoginContract.UserActionListener, BasePresenter<LoginContract.View>(disposable) {
 
-    /*init { App.component.inject(this) }
-
-    @Inject
-    lateinit var userTokenNetworkRepository: UserTokenNetworkRepository
-
-    @Inject
-    lateinit var sharedPreferences : SharedPreferences*/
-
     override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
         userTokenNetworkRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
                 .subscribe { response-> loginWithGithub(mAuth,response) }

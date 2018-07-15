@@ -8,7 +8,6 @@ open class BasePresenter<V : BaseView>(var disposable: CompositeDisposable) : Pr
 
     var weakReference: WeakReference<V>? = null
 
-
     val view: V?
         get() = weakReference?.get()
 
