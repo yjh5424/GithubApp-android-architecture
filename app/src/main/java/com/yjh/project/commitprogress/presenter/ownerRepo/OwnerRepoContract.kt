@@ -2,7 +2,7 @@ package com.yjh.project.commitprogress.presenter.ownerRepo
 
 import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
-import com.yjh.project.commitprogress.presenter.base.BaseUserActionsListener
+import com.yjh.project.commitprogress.presenter.base.BasePresenter
 import com.yjh.project.commitprogress.presenter.base.BaseView
 
 interface OwnerRepoContract{
@@ -23,7 +23,7 @@ interface OwnerRepoContract{
         fun onStargazersClick(person : Person)
     }
 
-    interface UserActionsListener : BaseUserActionsListener {
+    interface UserActionsListener  {
         //프레전터에서 상속받아서 구현
         fun loadProfile(userName : String)
 

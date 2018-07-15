@@ -10,9 +10,9 @@ class OwnerRepoPresenter(
         val view: OwnerRepoContract.View
 ) : OwnerRepoContract.UserActionsListener{
 
-    @Inject lateinit var userDataNetworkRepository: UserDataNetworkRepository
-
     init { App.component.inject(this) }
+
+    @Inject lateinit var userDataNetworkRepository: UserDataNetworkRepository
 
     override fun loadRepositories(userName : String) {
         userDataNetworkRepository.getRepositories(userName)

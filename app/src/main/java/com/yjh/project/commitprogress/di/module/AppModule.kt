@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 
@@ -23,4 +24,7 @@ class AppModule(private val app: Application) {
     @Singleton
     fun provideSharedPreferences() = app.getSharedPreferences(USER_ID_KEY,Context.MODE_PRIVATE)
 
+    @Provides
+    @Singleton
+    fun provideCompositeDisposable() = CompositeDisposable()
 }
