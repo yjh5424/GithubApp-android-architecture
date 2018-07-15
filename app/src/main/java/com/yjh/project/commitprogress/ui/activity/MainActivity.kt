@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.omjoonkim.project.interviewtask.model.Person
-import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
 import com.yjh.project.commitprogress.presenter.main.MainContract
-import com.yjh.project.commitprogress.presenter.main.MainPresenter
+import com.yjh.project.commitprogress.ui.base.BaseActivity
 import com.yjh.project.commitprogress.ui.fragment.OwnerRepoFragment
 import com.yjh.project.commitprogress.ui.fragment.SettingFragment
 import com.yjh.project.commitprogress.ui.fragment.TeamRepoFragment
@@ -16,15 +14,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() , MainContract.View{
 
-    lateinit var mActionsListener: MainContract.UserActionsListener
     lateinit var userID : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        mActionsListener=MainPresenter(this)
-       // mActionsListener.loadProfile("yjh5424")
 
         userID=intent.getStringExtra("id")
 
@@ -49,7 +43,7 @@ class MainActivity : BaseActivity() , MainContract.View{
 
         override fun getPageTitle(position: Int): CharSequence? = fragments[position].first
 
-        override fun getItem(position: Int): Fragment = fragments[position].second.value
+        override fun getItem(position: Int): Fragment = fragments[position].second.value as Fragment
 
         override fun getCount(): Int = fragments.size
     }

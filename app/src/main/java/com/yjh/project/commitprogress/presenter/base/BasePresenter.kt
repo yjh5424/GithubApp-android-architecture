@@ -8,6 +8,10 @@ open class BasePresenter<V : BaseView>(var disposable: CompositeDisposable) : Pr
 
     var weakReference: WeakReference<V>? = null
 
+
+    val view: V?
+        get() = weakReference?.get()
+
     override fun attachView(view: V) {
         weakReference = WeakReference(view)
         view.setPresenter(this)
@@ -18,5 +22,4 @@ open class BasePresenter<V : BaseView>(var disposable: CompositeDisposable) : Pr
         weakReference = null
         disposable.clear()
     }
-
 }

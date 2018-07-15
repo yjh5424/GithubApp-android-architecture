@@ -1,36 +1,34 @@
 package com.yjh.project.commitprogress.presenter.ownerRepo
 
 import com.omjoonkim.project.interviewtask.model.Person
-import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
+import com.yjh.project.commitprogress.presenter.base.BasePresenter
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 
-class OwnerRepoPresenter(
-        val view: OwnerRepoContract.View
-) : OwnerRepoContract.UserActionsListener{
+class OwnerRepoPresenter @Inject constructor(
+        val userDataNetworkRepository: UserDataNetworkRepository,
+        disposable: CompositeDisposable
+) : BasePresenter<OwnerRepoContract.View>(disposable), OwnerRepoContract.UserActionsListener {
 
-    init { App.component.inject(this) }
-
-    @Inject lateinit var userDataNetworkRepository: UserDataNetworkRepository
-
-    override fun loadRepositories(userName : String) {
+    override fun loadRepositories(userName: String) {
         userDataNetworkRepository.getRepositories(userName)
-                .subscribe {
-                    repo -> view.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
+                .subscribe { repo ->
+                    view?.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
                 }
     }
 
     override fun openRepositoriesDetails(repoName: String) {
-        view.moveRepositoryDetailUi(repoName)
+        view?.moveRepositoryDetailUi(repoName)
     }
 
-    override fun loadProfile(userName : String) {
+    override fun loadProfile(userName: String) {
         userDataNetworkRepository.getUserProfile(userName)
-                .subscribe { response -> view.showProfile(response) }
+                .subscribe { response -> view?.showProfile(response) }
     }
 
     override fun openStargazerProfile(person: Person) {
-        view.showProfile(person)
+        view?.showProfile(person)
     }
 }

@@ -10,16 +10,24 @@ import com.omjoonkim.project.interviewtask.model.Person
 import com.omjoonkim.project.interviewtask.model.Repo
 import com.squareup.picasso.Picasso
 import com.yjh.project.commitprogress.R
+import com.yjh.project.commitprogress.di.app.App
+import com.yjh.project.commitprogress.presenter.login.LoginPresenter
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoContract
 import com.yjh.project.commitprogress.presenter.ownerRepo.OwnerRepoPresenter
 import com.yjh.project.commitprogress.ui.activity.OwnerRepositoryDetailActivity
 import com.yjh.project.commitprogress.ui.adapter.OwnerRepoRecyclerViewAdapter
 import com.yjh.project.commitprogress.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_owner.view.*
+import javax.inject.Inject
 
-class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(), OwnerRepoContract.View {
+class OwnerRepoFragment : BaseFragment(), OwnerRepoContract.View {
 
     lateinit var userID: String
+
+    init { App.component.inject(this) }
+
+    @Inject
+    lateinit var presenter: OwnerRepoPresenter
 
     companion object {
         fun newInstance(id: String) =
@@ -29,8 +37,6 @@ class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(),
                     }
                 }
     }
-
-    override val presenter: OwnerRepoContract.UserActionsListener by lazy { OwnerRepoPresenter(this) }
 
     private val ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
@@ -46,18 +52,21 @@ class OwnerRepoFragment : BaseFragment<OwnerRepoContract.UserActionsListener>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        presenter.attachView(this)
         arguments?.let { userID = it.getString("id") }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_owner, container, false)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_owner, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.recyclerView.layoutManager = LinearLayoutManager(context)
-        view.recyclerView.adapter = ownerRepoRecyclerViewAdapter
+        init(view)
+    }
+
+    private fun init(rootView : View){
+        rootView.recyclerView.layoutManager = LinearLayoutManager(context)
+        rootView.recyclerView.adapter = ownerRepoRecyclerViewAdapter
 
         presenter.loadRepositories(userID)
         presenter.loadProfile(userID)

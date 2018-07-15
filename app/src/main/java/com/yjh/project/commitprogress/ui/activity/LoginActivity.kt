@@ -6,29 +6,37 @@ import android.os.Bundle
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.yjh.project.commitprogress.R
-import com.yjh.project.commitprogress.domain.model.AccessToken
+import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.presenter.login.LoginContract
 import com.yjh.project.commitprogress.presenter.login.LoginPresenter
+import com.yjh.project.commitprogress.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.HttpUrl
+import javax.inject.Inject
 
 
 class LoginActivity : BaseActivity() , LoginContract.View{
 
+    init { App.component.inject(this) }
 
-    lateinit var userActionListener: LoginContract.UserActionListener
-    lateinit var mAuth: FirebaseAuth
+    @Inject
+    lateinit var presenter: LoginPresenter
+
+    private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        userActionListener=LoginPresenter(this)
-        mAuth= FirebaseAuth.getInstance()
+        presenter.attachView(this)
+        init()
 
+    }
+
+    private fun init(){
         login_button.setOnClickListener {
             //github 웹뷰에서 로그인후 token 값 얻어야함
-            userActionListener.loadGithubWebView()
+            presenter.loadGithubWebView()
         }
     }
 
@@ -47,7 +55,7 @@ class LoginActivity : BaseActivity() , LoginContract.View{
 
         if (code != null && state != null) {
             Log.d("RedirectedActivity", "code != null && state != null")
-            userActionListener.loadGithubToken(
+            presenter.loadGithubToken(
                 mAuth,
                 code,
                 state

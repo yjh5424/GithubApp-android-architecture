@@ -7,22 +7,27 @@ import com.google.firebase.auth.GithubAuthProvider
 import com.yjh.project.commitprogress.di.module.AppModule
 import com.yjh.project.commitprogress.domain.Repository.UserTokenNetworkRepository
 import com.yjh.project.commitprogress.domain.model.AccessToken
+import com.yjh.project.commitprogress.presenter.base.BasePresenter
+import io.reactivex.disposables.CompositeDisposable
 import okhttp3.HttpUrl
 import java.math.BigInteger
 import java.util.*
 import javax.inject.Inject
 
 
-class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionListener{
+class LoginPresenter @Inject constructor(
+        var userTokenNetworkRepository: UserTokenNetworkRepository,
+        var sharedPreferences: SharedPreferences,
+        disposable: CompositeDisposable
+) : LoginContract.UserActionListener, BasePresenter<LoginContract.View>(disposable) {
 
-    init { App.component.inject(this) }
+    /*init { App.component.inject(this) }
 
     @Inject
     lateinit var userTokenNetworkRepository: UserTokenNetworkRepository
 
     @Inject
-    lateinit var sharedPreferences : SharedPreferences
-
+    lateinit var sharedPreferences : SharedPreferences*/
 
     override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
         userTokenNetworkRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
@@ -35,7 +40,7 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
 
         mAuth.signInWithCredential(credential).addOnCompleteListener { it ->
             if (it.isSuccessful) {
-                view.moveMainActivity(it.result.additionalUserInfo.username)
+                view?.moveMainActivity(it.result.additionalUserInfo.username)
                 sharedPreferences.edit().putString(AppModule.USER_ID_KEY,it.result.user.uid).commit()
                 sharedPreferences.edit().clear()
             }
@@ -56,7 +61,7 @@ class LoginPresenter(val view: LoginContract.View) : LoginContract.UserActionLis
                 .addQueryParameter("allow_signup","false")
                 .build()
 
-        view.moveGithubWebView(httpUrl)
+        view?.moveGithubWebView(httpUrl)
     }
 
     private fun getRandomString(): String = BigInteger(130, Random()).toString(32)
