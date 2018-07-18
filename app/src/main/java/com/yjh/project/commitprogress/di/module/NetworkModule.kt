@@ -78,4 +78,6 @@ class NetworkModule(val mBaseUrl: String) {
     @Provides
     @Singleton
     fun provideUserDataNetworkRepository(githubApiClient: GithubApiClient) = UserDataNetworkRepository(githubApiClient)
+
+
 }

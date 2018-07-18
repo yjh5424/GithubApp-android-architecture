@@ -10,14 +10,15 @@ import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.presenter.login.LoginContract
 import com.yjh.project.commitprogress.presenter.login.LoginPresenter
 import com.yjh.project.commitprogress.ui.base.BaseActivity
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.HttpUrl
 import javax.inject.Inject
 
 
 class LoginActivity : BaseActivity() , LoginContract.View{
-
-    init { App.component.inject(this) }
+    override fun onActivityInject() {
+    }
 
     @Inject
     lateinit var presenter: LoginPresenter
@@ -30,7 +31,6 @@ class LoginActivity : BaseActivity() , LoginContract.View{
 
         presenter.attachView(this)
         init()
-
     }
 
     private fun init(){

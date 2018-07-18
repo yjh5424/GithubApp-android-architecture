@@ -1,12 +1,22 @@
 package com.yjh.project.commitprogress.ui.base
 
 import android.net.Uri
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.yjh.project.commitprogress.presenter.base.BasePresenter
 import com.yjh.project.commitprogress.presenter.base.BaseView
 
-open class BaseActivity : AppCompatActivity(), BaseView {
+abstract class BaseActivity : AppCompatActivity(), BaseView {
+
+
+
+    abstract fun onActivityInject()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onActivityInject()
+    }
 
     private var presenter: BasePresenter<*>? = null
 

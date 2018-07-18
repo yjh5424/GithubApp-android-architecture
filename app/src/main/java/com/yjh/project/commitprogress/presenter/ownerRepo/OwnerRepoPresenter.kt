@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 
 class OwnerRepoPresenter @Inject constructor(
-        val userDataNetworkRepository: UserDataNetworkRepository,
+        private val userDataNetworkRepository: UserDataNetworkRepository,
         disposable: CompositeDisposable
 ) : BasePresenter<OwnerRepoContract.View>(disposable), OwnerRepoContract.UserActionsListener {
 
@@ -35,6 +35,9 @@ class OwnerRepoPresenter @Inject constructor(
                 .subscribe(
                         { response ->
                             view?.showProfile(response)
+                        },
+                        {
+                            //error
                         }
                 )
         )

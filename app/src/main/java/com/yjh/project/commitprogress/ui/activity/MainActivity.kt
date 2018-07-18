@@ -13,6 +13,9 @@ import com.yjh.project.commitprogress.ui.fragment.TeamRepoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() , MainContract.View{
+    override fun onActivityInject() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     lateinit var userID : String
 
