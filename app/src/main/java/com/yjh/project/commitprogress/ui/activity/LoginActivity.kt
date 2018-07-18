@@ -18,6 +18,7 @@ import javax.inject.Inject
 
 class LoginActivity : BaseActivity() , LoginContract.View{
     override fun onActivityInject() {
+        App.component.inject(this)
     }
 
     @Inject

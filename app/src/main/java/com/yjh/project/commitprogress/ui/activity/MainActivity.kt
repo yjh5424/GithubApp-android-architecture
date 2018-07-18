@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.yjh.project.commitprogress.R
+import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.presenter.main.MainContract
 import com.yjh.project.commitprogress.ui.base.BaseActivity
 import com.yjh.project.commitprogress.ui.fragment.OwnerRepoFragment
@@ -13,9 +14,6 @@ import com.yjh.project.commitprogress.ui.fragment.TeamRepoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() , MainContract.View{
-    override fun onActivityInject() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     lateinit var userID : String
 
@@ -27,8 +25,10 @@ class MainActivity : BaseActivity() , MainContract.View{
 
         viewPager.adapter = ViewPagerAdapter(supportFragmentManager,userID)
         tabLayout.setupWithViewPager(viewPager)
+    }
 
-
+    override fun onActivityInject() {
+        App.component.inject(this)
     }
 
     class ViewPagerAdapter(fragmentManager: FragmentManager,id : String) : FragmentPagerAdapter(fragmentManager) {
