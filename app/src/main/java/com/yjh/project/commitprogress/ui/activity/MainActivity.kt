@@ -46,7 +46,7 @@ class MainActivity : BaseActivity() , MainContract.View{
 
         override fun getPageTitle(position: Int): CharSequence? = fragments[position].first
 
-        override fun getItem(position: Int): Fragment = fragments[position].second.value as Fragment
+        override fun getItem(position: Int): Fragment = fragments[position].second.value
 
         override fun getCount(): Int = fragments.size
     }

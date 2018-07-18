@@ -10,21 +10,20 @@ import com.yjh.project.commitprogress.di.app.App
 import com.yjh.project.commitprogress.presenter.login.LoginContract
 import com.yjh.project.commitprogress.presenter.login.LoginPresenter
 import com.yjh.project.commitprogress.ui.base.BaseActivity
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.HttpUrl
 import javax.inject.Inject
 
-
 class LoginActivity : BaseActivity() , LoginContract.View{
-    override fun onActivityInject() {
-        App.component.inject(this)
-    }
 
     @Inject
     lateinit var presenter: LoginPresenter
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    override fun onActivityInject() {
+        App.component.inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +40,6 @@ class LoginActivity : BaseActivity() , LoginContract.View{
         }
     }
 
-    override fun moveGithubWebView(okHttpUrl: HttpUrl) {
-        Intent(Intent.ACTION_VIEW, Uri.parse(okHttpUrl.toString())).let {
-            startActivity(it)
-            startActivityForResult(it,100)
-        }
-    }
-
     override fun onResume() {
         super.onResume()
 
@@ -57,10 +49,17 @@ class LoginActivity : BaseActivity() , LoginContract.View{
         if (code != null && state != null) {
             Log.d("RedirectedActivity", "code != null && state != null")
             presenter.loadGithubToken(
-                mAuth,
-                code,
-                state
+                    mAuth,
+                    code,
+                    state
             )
+        }
+    }
+
+    override fun moveGithubWebView(okHttpUrl: HttpUrl) {
+        Intent(Intent.ACTION_VIEW, Uri.parse(okHttpUrl.toString())).let {
+            startActivity(it)
+            startActivityForResult(it,100)
         }
     }
 
@@ -71,4 +70,9 @@ class LoginActivity : BaseActivity() , LoginContract.View{
             finish()
         }
     }
+
+    override fun hideProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

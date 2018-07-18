@@ -20,7 +20,7 @@ class OwnerRepoPresenter @Inject constructor(
                              view?.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
                         },
                         {
-                            // error
+                            view?.onError()
                         }
                 )
         )
@@ -37,7 +37,7 @@ class OwnerRepoPresenter @Inject constructor(
                             view?.showProfile(response)
                         },
                         {
-                            //error
+                            view?.onError()
                         }
                 )
         )
