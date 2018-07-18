@@ -1,13 +1,21 @@
 package com.yjh.project.commitprogress.ui.base
 
 import android.net.Uri
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.yjh.project.commitprogress.presenter.base.BasePresenter
 import com.yjh.project.commitprogress.presenter.base.BaseView
 
-open class BaseFragment : Fragment(), BaseView {
+abstract class BaseFragment : Fragment(), BaseView {
+
+    abstract fun onActivityInject()
 
     private var presenter: BasePresenter<*>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onActivityInject()
+    }
 
     override fun onError() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

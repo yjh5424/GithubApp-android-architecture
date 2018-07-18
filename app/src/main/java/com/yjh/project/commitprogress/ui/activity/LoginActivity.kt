@@ -71,8 +71,4 @@ class LoginActivity : BaseActivity() , LoginContract.View{
         }
     }
 
-    override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }

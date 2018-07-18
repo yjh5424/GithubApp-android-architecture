@@ -12,7 +12,6 @@ interface LoginContract{
     interface View : BaseView{
         fun moveMainActivity(id : String)
         fun moveGithubWebView(httpUrl: HttpUrl)
-        fun hideProgress()
     }
 
     interface UserActionListener {

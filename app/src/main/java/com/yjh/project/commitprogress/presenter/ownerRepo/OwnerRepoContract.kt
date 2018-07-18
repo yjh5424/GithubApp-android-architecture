@@ -13,6 +13,10 @@ interface OwnerRepoContract{
 
         fun showProfile(person: Person)
 
+        fun hideProgress()
+
+        fun noResult()
+
         fun moveRepositoryDetailUi(repoName: String)
 
     }

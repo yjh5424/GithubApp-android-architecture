@@ -23,9 +23,7 @@ import javax.inject.Inject
 class OwnerRepoFragment : BaseFragment(), OwnerRepoContract.View {
 
     lateinit var userID: String
-
-    init { App.component.inject(this) }
-
+    
     @Inject
     lateinit var presenter: OwnerRepoPresenter
 
@@ -56,6 +54,10 @@ class OwnerRepoFragment : BaseFragment(), OwnerRepoContract.View {
         arguments?.let { userID = it.getString("id") }
     }
 
+    override fun onActivityInject() {
+        App.component.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_owner, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,6 +72,14 @@ class OwnerRepoFragment : BaseFragment(), OwnerRepoContract.View {
 
         presenter.loadRepositories(userID)
         presenter.loadProfile(userID)
+    }
+
+    override fun hideProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun noResult() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showRepositories(repositories: List<Pair<Repo, List<Person>>>) {

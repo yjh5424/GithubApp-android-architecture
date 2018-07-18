@@ -4,12 +4,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.yjh.project.commitprogress.presenter.base.BasePresenter
 import com.yjh.project.commitprogress.presenter.base.BaseView
 
 abstract class BaseActivity : AppCompatActivity(), BaseView {
 
-
+    private var presenter: BasePresenter<*>? = null
 
     abstract fun onActivityInject()
 
@@ -18,10 +19,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
         onActivityInject()
     }
 
-    private var presenter: BasePresenter<*>? = null
-
     override fun onError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        showToast("error")
     }
 
     override fun setPresenter(presenter: BasePresenter<*>) {
@@ -31,6 +30,10 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     override fun onDestroy() {
         super.onDestroy()
         presenter?.detachView()
+    }
+
+    private fun showToast(msg : String){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
     }
 
     fun stringToUri(str: String) : Uri = Uri.parse(str)
