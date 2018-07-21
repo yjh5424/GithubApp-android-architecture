@@ -23,18 +23,9 @@ import javax.inject.Inject
 class OwnerRepoFragment : BaseFragment(), OwnerRepoContract.View {
 
     lateinit var userID: String
-    
+
     @Inject
     lateinit var presenter: OwnerRepoPresenter
-
-    companion object {
-        fun newInstance(id: String) =
-                OwnerRepoFragment().apply {
-                    arguments = Bundle().apply {
-                        putString("id", id)
-                    }
-                }
-    }
 
     private val ownerRepoRecyclerViewAdapter by lazy { OwnerRepoRecyclerViewAdapter(repositoryClick) }
 
@@ -48,22 +39,35 @@ class OwnerRepoFragment : BaseFragment(), OwnerRepoContract.View {
         }
     })
 
+    companion object {
+        fun newInstance(id: String) =
+                OwnerRepoFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("id", id)
+                    }
+                }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.attachView(this)
         arguments?.let { userID = it.getString("id") }
     }
 
-    override fun onActivityInject() {
+    override fun onFragmentInject() {
         App.component.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_owner, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView =inflater.inflate(R.layout.fragment_owner, container, false)
+        init(rootView)
+
+        return rootView
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        init(view)
     }
 
     private fun init(rootView : View){

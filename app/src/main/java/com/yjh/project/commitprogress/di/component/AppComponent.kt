@@ -25,4 +25,6 @@ interface AppComponent{
     fun inject(mainActivity: MainActivity)
 
     fun inject(ownerRepositoryDetailActivity: OwnerRepositoryDetailActivity)
+
+
 }

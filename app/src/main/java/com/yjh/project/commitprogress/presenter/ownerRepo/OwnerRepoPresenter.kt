@@ -1,5 +1,6 @@
 package com.yjh.project.commitprogress.presenter.ownerRepo
 
+import android.util.Log
 import com.omjoonkim.project.interviewtask.model.Person
 import com.yjh.project.commitprogress.domain.Repository.UserDataNetworkRepository
 import com.yjh.project.commitprogress.presenter.base.BasePresenter
@@ -14,16 +15,19 @@ class OwnerRepoPresenter @Inject constructor(
 
     override fun loadRepositories(userName: String) {
 
-        disposable.add(userDataNetworkRepository.getRepositories(userName)
+        userDataNetworkRepository.getRepositories(userName)
                 .subscribe(
                         { repo ->
-                             view?.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
+                            Log.d("test",repo.size.toString())
+                            view?.showRepositories(repo.sortedByDescending { repo -> repo.first.stargazersCount })
                         },
                         {
                             view?.onError()
                         }
                 )
-        )
+
+        /*isposable.add(
+        )*/
     }
 
     override fun openRepositoriesDetails(repoName: String) {
@@ -31,7 +35,7 @@ class OwnerRepoPresenter @Inject constructor(
     }
 
     override fun loadProfile(userName: String) {
-        disposable.add(userDataNetworkRepository.getUserProfile(userName)
+        userDataNetworkRepository.getUserProfile(userName)
                 .subscribe(
                         { response ->
                             view?.showProfile(response)
@@ -40,7 +44,7 @@ class OwnerRepoPresenter @Inject constructor(
                             view?.onError()
                         }
                 )
-        )
+
     }
 
     override fun openStargazerProfile(person: Person) {

@@ -8,13 +8,13 @@ import com.yjh.project.commitprogress.presenter.base.BaseView
 
 abstract class BaseFragment : Fragment(), BaseView {
 
-    abstract fun onActivityInject()
+    abstract fun onFragmentInject()
 
     private var presenter: BasePresenter<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        onActivityInject()
+        onFragmentInject()
     }
 
     override fun onError() {

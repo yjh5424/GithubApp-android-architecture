@@ -9,6 +9,9 @@ import com.yjh.project.commitprogress.presenter.teamRepo.TeamRepoContract
 import com.yjh.project.commitprogress.ui.base.BaseFragment
 
 class TeamRepoFragment : BaseFragment(), TeamRepoContract.View {
+    override fun onFragmentInject() {
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
