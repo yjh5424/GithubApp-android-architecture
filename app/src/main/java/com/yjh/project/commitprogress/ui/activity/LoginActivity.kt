@@ -34,6 +34,7 @@ class LoginActivity : BaseActivity() , LoginContract.View{
     }
 
     private fun init(){
+
         login_button.setOnClickListener {
             //github 웹뷰에서 로그인후 token 값 얻어야함
             presenter.loadGithubWebView()

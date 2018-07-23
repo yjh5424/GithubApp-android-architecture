@@ -18,5 +18,6 @@ interface LoginContract{
         fun loginWithGithub(mAuth: FirebaseAuth,accessToken: AccessToken)
         fun loadGithubWebView()
         fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String)
+        fun confirmSeeion
     }
 }

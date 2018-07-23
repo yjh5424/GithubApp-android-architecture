@@ -21,6 +21,7 @@ class LoginPresenter @Inject constructor(
         disposable: CompositeDisposable
 ) : LoginContract.UserActionListener, BasePresenter<LoginContract.View>(disposable) {
 
+
     override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
         userTokenNetworkRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
                 .subscribe { response-> loginWithGithub(mAuth,response) }
@@ -34,7 +35,6 @@ class LoginPresenter @Inject constructor(
             if (it.isSuccessful) {
                 view?.moveMainActivity(it.result.additionalUserInfo.username)
                 sharedPreferences.edit().putString(AppModule.USER_ID_KEY,it.result.user.uid).commit()
-                sharedPreferences.edit().clear()
             }
         }
     }
