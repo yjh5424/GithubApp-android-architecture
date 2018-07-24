@@ -21,6 +21,19 @@ class LoginPresenter @Inject constructor(
         disposable: CompositeDisposable
 ) : LoginContract.UserActionListener, BasePresenter<LoginContract.View>(disposable) {
 
+    private fun saveToken(uId : String){
+        sharedPreferences.edit().putString(AppModule.USER_ID_KEY,uId).commit()
+    }
+
+    override fun confirmSession() {
+        var userName =sharedPreferences.getString(AppModule.USER_ID_KEY,"null")
+
+        if( userName != null) {
+            view?.moveMainActivity(userName)
+        }else{
+            view?.onError()
+        }
+    }
 
     override fun loadGithubToken(mAuth: FirebaseAuth,code : String, state : String) {
         userTokenNetworkRepository.getAccessToken(App.CLIENT_ID,App.CLIENT_SECRET,code,App.redirect_uri,state)
@@ -34,7 +47,7 @@ class LoginPresenter @Inject constructor(
         mAuth.signInWithCredential(credential).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 view?.moveMainActivity(it.result.additionalUserInfo.username)
-                sharedPreferences.edit().putString(AppModule.USER_ID_KEY,it.result.user.uid).commit()
+                saveToken(it.result.additionalUserInfo.username)
             }
         }
     }
