@@ -1,5 +1,6 @@
 # GithubApp-android-architecture
-Application that check your commit log (rxjava2+mvp+dagger2+kotlin+retrofit2+constraintlayout)
+깃허브 커밋목록, 레포, 팀등 모든 정보를 볼 수 있는 어플리케이션입니다.
+It is an application that can see all information about github
 
 ## MVP-Architecture
 **Dagger2 + MVP + Retrofit2 + RxJava2 (JUnit4 , Espress를 이용한 Ui, 단위 테스트 까지)** . 
