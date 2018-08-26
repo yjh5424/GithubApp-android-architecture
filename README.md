@@ -16,5 +16,5 @@ Github api를 사용하여 간단한 프로젝트를 만듭니다!
 Create a simple project using Github api!
 This project is good for everyone and writes good code and
 The goal is to create enough code for others to use when studying Android
-I am studying too much because there are a lot of things that I would appreciate if you write a PR with reason
+I am studying too much because there are a lot of things that I would appreciate if you write a PR with reason :)
   
