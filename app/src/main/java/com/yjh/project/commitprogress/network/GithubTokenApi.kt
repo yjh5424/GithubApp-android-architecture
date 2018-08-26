@@ -19,6 +19,4 @@ interface GithubTokenApi{
             @Field("redirect_uri") redirectUri : String,
             @Field("state") state : String
     ) : Single<AccessToken>
-
-
 }

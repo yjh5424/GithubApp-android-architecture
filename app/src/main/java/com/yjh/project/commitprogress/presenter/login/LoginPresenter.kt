@@ -28,8 +28,8 @@ class LoginPresenter @Inject constructor(
     override fun confirmSession() {
         var userName =sharedPreferences.getString(AppModule.USER_ID_KEY,"null")
 
-        if( userName != null) {
-            view?.moveMainActivity(userName)
+        if( userName != "null") {
+            view?.moveMainActivity(userName);
         }else{
             view?.onError()
         }

@@ -54,10 +54,10 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVer"
     implementation "com.google.dagger:dagger-android-support:$daggerVer"
 
-    provided 'javax.annotation:jsr250-api:1.0'
+    compileOnly 'javax.annotation:jsr250-api:1.0'
 
     // image
-    compile 'com.squareup.picasso:picasso:2.3.3'
+    implementation 'com.squareup.picasso:picasso:2.3.3'
 
     // Retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.2.0'
