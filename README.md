@@ -7,7 +7,7 @@ It is an application that can see all information about github
 **Dagger2 + MVP + Retrofit2 + RxJava2 (JUnit4 , Espress를 이용한 Ui, 단위 테스트 까지)** . 
   
 ## MVVM-Architecture
-**Dagger2 + MVVM + Retrofit2 + RxJava2 + AAC(Room + Viewmodel + LiveData) (JUnit4 , Espress를 이용한 Ui, 단위 테스트 까지)** . 
+**Dagger2 + MVVM + Retrofit2 + RxJava2 + AAC(Room + Viewmodel + LiveData)** . 
   
 ---- 
 
