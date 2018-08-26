@@ -3,7 +3,6 @@
 It is an application that can see all information about github.
   
 클린아키텍쳐를 권장합니다.  
-
 clean architecture is recommended.  
 
 ## MVP-Architecture
