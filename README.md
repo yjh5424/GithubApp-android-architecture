@@ -1,5 +1,6 @@
 # GithubApp-android-architecture
-깃허브 커밋목록, 레포, 팀등 모든 정보를 볼 수 있는 어플리케이션입니다.
+깃허브 커밋목록, 레포, 팀등 모든 정보를 볼 수 있는 어플리케이션입니다.  
+
 It is an application that can see all information about github
 
 ## MVP-Architecture
