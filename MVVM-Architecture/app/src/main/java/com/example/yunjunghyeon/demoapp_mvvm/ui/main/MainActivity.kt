@@ -9,6 +9,7 @@ import com.example.yunjunghyeon.demoapp_mvvm.ViewModelFactory
 import com.example.yunjunghyeon.demoapp_mvvm.di.app.BaseApp
 import com.example.yunjunghyeon.demoapp_mvvm.domain.model.Status
 import com.example.yunjunghyeon.demoapp_mvvm.ui.BaseActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
@@ -16,10 +17,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     lateinit var viewModel : MainViewModel
     val Tag ="MainActivity_log_"
-    override fun inject(){
-        BaseApp.appComponent.inject(this)
-    }
-
+    override fun inject() = BaseApp.appComponent.inject(this)
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -29,7 +27,6 @@ class MainActivity : BaseActivity<MainViewModel>() {
         setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
-
         viewModel.loadRepositories("yjh5424")
 
         viewModel.run {
@@ -38,7 +35,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
                    Status.ERROR -> Log.d("status","error")
                    Status.SUCCESS -> {
                        Log.d(Tag+"status","success")
-                       Log.d(Tag+"status",it!!.data.toString())
+                       Log.d(Tag+"status",it.data.toString())
                    }
                    Status.LOADING -> Log.d(Tag+"status","loading")
                }
