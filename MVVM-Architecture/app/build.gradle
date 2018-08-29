@@ -78,6 +78,20 @@ dependencies {
     //login github with firebase
     implementation 'com.google.firebase:firebase-auth:15.0.0'
 
+    //recycler view
+    implementation 'com.android.support:recyclerview-v7:+'
+    implementation 'com.android.support:cardview-v7:+'
+
+    //paging
+    def paging_version = "1.0.0"
+
+    implementation "android.arch.paging:runtime:$paging_version"
+
+    // alternatively - without Android dependencies for testing
+    testImplementation "android.arch.paging:common:$paging_version"
+
+    // optional - RxJava support, currently in release candidate
+    implementation "android.arch.paging:rxjava2:1.0.0-rc1"
 }
 
 apply plugin: 'com.google.gms.google-services'
