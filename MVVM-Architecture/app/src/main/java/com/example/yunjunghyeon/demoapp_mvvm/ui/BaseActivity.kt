@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity
 
 abstract class BaseActivity<T : ViewModel> : AppCompatActivity(){
 
-    abstract fun bind(t : T)
-
     abstract fun inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
