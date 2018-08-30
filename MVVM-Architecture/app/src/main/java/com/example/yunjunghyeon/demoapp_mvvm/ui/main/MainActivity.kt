@@ -3,8 +3,10 @@ package com.example.yunjunghyeon.demoapp_mvvm.ui.main
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.widget.Toast
 import com.example.yunjunghyeon.demoapp_mvvm.R
 import com.example.yunjunghyeon.demoapp_mvvm.ViewModelFactory
 import com.example.yunjunghyeon.demoapp_mvvm.di.app.BaseApp
@@ -14,7 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity<MainViewModel>() {
+class MainActivity : BaseActivity<MainViewModel>() , SwipeRefreshLayout.OnRefreshListener{
+
 
     val Tag ="MainActivity_log_"
 
@@ -31,15 +34,15 @@ class MainActivity : BaseActivity<MainViewModel>() {
         setContentView(R.layout.activity_main)
 
         recyclerInit()
+        swipeInit()
+
         viewModel.loadRepositories("yjh5424")
 
         viewModel.run {
             repositoriesOutStream.observe(this@MainActivity, Observer {
                when(it!!.status){
-                   Status.ERROR -> Log.d("status","error")
+                   Status.ERROR -> Toast.makeText(applicationContext,"네트워크 오류",Toast.LENGTH_SHORT).show()
                    Status.SUCCESS -> {
-                       Log.d(Tag+"status","success")
-                       Log.d(Tag+"status",it.data.toString())
                        adapter.setData(it.data!!.toMutableList())
                        main_swipe.isRefreshing=false
                    }
@@ -54,6 +57,11 @@ class MainActivity : BaseActivity<MainViewModel>() {
         main_recycler.adapter = adapter
     }
 
+    private fun swipeInit(){
+        main_swipe.setOnRefreshListener(this)
+    }
 
-
+    override fun onRefresh() {
+        main_swipe.isRefreshing=false
+    }
 }
