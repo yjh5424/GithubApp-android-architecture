@@ -13,7 +13,6 @@ class MainViewModel(val repositoryImpl: UserDataRepositoryImpl) : BaseViewModel(
 
     val repositoriesOutStream = MutableLiveData<Response<List<Pair<Repo, List<Person>>>>>()
 
-
     fun loadRepositories(userName: String) {
         composite.add(repositoryImpl.getRepositories(userName)
                 .doOnSubscribe { _ -> repositoriesOutStream.value= Response.loading()  }
